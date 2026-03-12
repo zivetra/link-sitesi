@@ -1,0 +1,367 @@
+================================================================================
+SOSYAL MEDYA LİNK TOPLAMA SİTESİ - PROJE YOL HARİTASI
+================================================================================
+
+PROJE ADI: LinkHub (veya istediğin bir isim)
+HEDEF: Kullanıcıların tüm sosyal medya linklerini tek bir sayfada toplayan platform
+ÇALIŞMA ORTAMI: Localhost (127.0.0.1) - Tarayıcı tabanlı
+VERİ DEPOLAMA: localStorage (Tarayıcı yerel depolama)
+
+================================================================================
+AŞAMA 1: PROJE KURULUMU VE PLANLAMA
+================================================================================
+☑ 1.1 - Proje klasör yapısını oluştur
+☑ 1.2 - Teknoloji stack'ini belirle (React + Vite + Tailwind CSS)
+☑ 1.3 - localStorage veri yapısını planla (storage.js oluşturuldu)
+☑ 1.4 - Temel özellik listesi (MVP) hazırla
+☑ 1.5 - Kullanıcı akış diyagramı çiz (AI ile)
+
+================================================================================
+AŞAMA 2: KONSEPT VE TASARIM (VİZE İÇİN ÖNEMLİ!)
+================================================================================
+☑ 2.1 - Problem tanımı ve hedef kullanıcı profili yaz (LLM ile)
+☑ 2.2 - Kullanıcı yolculuğu (User Journey) oluştur
+☑ 2.3 - MVP özellikleri listesi hazırla
+☑ 2.4 - Ana sayfa tasarımı (shadcn/ui ile kodlandı)
+☑ 2.5 - Kayıt/Giriş ekranı tasarımı (shadcn/ui ile kodlandı)
+☑ 2.6 - Kullanıcı dashboard tasarımı (shadcn/ui ile kodlandı)
+☑ 2.7 - Profil görüntüleme sayfası tasarımı (shadcn/ui ile kodlandı)
+☑ 2.8 - Tüm sayfalar minimal ve sade tasarımla tamamlandı
+
+================================================================================
+AŞAMA 3: LOCALSTORAGE VERİ YAPISI TASARIMI
+================================================================================
+☐ 3.1 - localStorage veri modeli tasarla
+      users: [{id, username, email, password, createdAt}]
+☐ 3.2 - Linkler veri modeli
+      links: [{id, userId, platformName, url, icon, order, isActive}]
+☐ 3.3 - Profil ayarları veri modeli
+      profiles: [{id, userId, bio, avatar, theme, customUrl}]
+☐ 3.4 - Aktif kullanıcı oturumu (currentUser)
+☐ 3.5 - localStorage helper fonksiyonları planla
+
+================================================================================
+AŞAMA 4: LOCALSTORAGE YÖNETİMİ (BACKEND YERİNE)
+================================================================================
+☐ 4.1 - localStorage helper class/module oluştur
+☐ 4.2 - Kullanıcı kayıt fonksiyonu (registerUser)
+☐ 4.3 - Kullanıcı giriş fonksiyonu (loginUser)
+☐ 4.4 - Oturum yönetimi (currentUser set/get/clear)
+☐ 4.5 - Link ekleme fonksiyonu (addLink)
+☐ 4.6 - Link güncelleme fonksiyonu (updateLink)
+☐ 4.7 - Link silme fonksiyonu (deleteLink)
+☐ 4.8 - Link listeleme fonksiyonu (getUserLinks)
+☐ 4.9 - Profil görüntüleme fonksiyonu (getProfile)
+☐ 4.10 - Profil güncelleme fonksiyonu (updateProfile)
+☐ 4.11 - Veri doğrulama (validation) fonksiyonları
+
+================================================================================
+AŞAMA 5: FRONTEND GELİŞTİRME - KAYIT/GİRİŞ
+================================================================================
+☐ 5.1 - Ana sayfa (landing page) oluştur
+☐ 5.2 - Kayıt formu sayfası
+☐ 5.3 - Giriş formu sayfası
+☐ 5.4 - Form validasyonu ekle
+☐ 5.5 - localStorage ile kayıt/giriş entegrasyonu
+☐ 5.6 - Hata mesajları gösterimi
+☐ 5.7 - Başarılı giriş sonrası yönlendirme
+
+================================================================================
+AŞAMA 6: FRONTEND GELİŞTİRME - DASHBOARD
+================================================================================
+☐ 6.1 - Kullanıcı dashboard sayfası
+☐ 6.2 - Link ekleme formu
+☐ 6.3 - Link listesi görünümü
+☐ 6.4 - Link düzenleme özelliği
+☐ 6.5 - Link silme özelliği
+☐ 6.6 - Drag & drop ile sıralama (opsiyonel)
+☐ 6.7 - Link aktif/pasif toggle
+
+================================================================================
+AŞAMA 7: FRONTEND GELİŞTİRME - PROFİL SAYFASI
+================================================================================
+☐ 7.1 - Profil görüntüleme sayfası (/username)
+☐ 7.2 - Profil fotoğrafı gösterimi
+☐ 7.3 - Bio/açıklama gösterimi
+☐ 7.4 - Link kartları tasarımı
+☐ 7.5 - Sosyal medya ikonları
+☐ 7.6 - Responsive tasarım
+☐ 7.7 - Tema seçenekleri (açık/koyu mod)
+
+================================================================================
+AŞAMA 8: SOSYAL MEDYA PLATFORMLARI
+================================================================================
+☐ 8.1 - Popüler platformlar listesi hazırla
+      (Instagram, Twitter, LinkedIn, GitHub, YouTube, TikTok, vb.)
+☐ 8.2 - Platform ikonları ekle
+☐ 8.3 - Platform renk şemaları
+☐ 8.4 - Özel link ekleme özelliği
+
+================================================================================
+AŞAMA 9: EK ÖZELLİKLER (MVP SONRASI)
+================================================================================
+☐ 9.1 - Profil fotoğrafı yükleme
+☐ 9.2 - Özel URL (custom slug) belirleme
+☐ 9.3 - Tema özelleştirme
+☐ 9.4 - Link tıklama istatistikleri (opsiyonel)
+☐ 9.5 - QR kod oluşturma
+☐ 9.6 - Profil paylaşma butonu
+
+================================================================================
+AŞAMA 10: TEST VE HATA AYIKLAMA
+================================================================================
+☐ 10.1 - Kayıt/giriş testleri
+☐ 10.2 - Link CRUD işlemleri testleri
+☐ 10.3 - Responsive tasarım testleri
+☐ 10.4 - Tarayıcı uyumluluğu testleri
+☐ 10.5 - Güvenlik testleri (SQL injection, XSS)
+
+================================================================================
+AŞAMA 11: DOKÜMANTASYON (FİNAL İÇİN ÖNEMLİ!)
+================================================================================
+☐ 11.1 - README.md dosyası oluştur
+☐ 11.2 - Proje özeti yaz
+☐ 11.3 - Kullanılan AI araçları listesi
+☐ 11.4 - Prompt kütüphanesi ekle
+☐ 11.5 - Kurulum adımları
+☐ 11.6 - Ekran görüntüleri ekle
+☐ 11.7 - Gelecek vizyonu yaz
+☐ 11.8 - .env.example dosyası oluştur
+☐ 11.9 - .gitignore dosyası kontrol et
+
+================================================================================
+AŞAMA 12: GITHUB VE TESLİM
+================================================================================
+☐ 12.1 - GitHub deposu oluştur
+☐ 12.2 - .gitignore ayarla
+☐ 12.3 - İlk commit
+☐ 12.4 - Düzenli commit'ler yap
+☐ 12.5 - README'yi tamamla
+☐ 12.6 - Depoyu public yap
+☐ 12.7 - Son kontroller
+
+================================================================================
+ÖNERİLEN TEKNOLOJİ STACK (LOCALHOST - FRONTEND ONLY)
+================================================================================
+
+SEÇENEK 1 (Basit - Önerilen - Hızlı Başlangıç):
+- Frontend: HTML, CSS, JavaScript (Vanilla)
+- Veri Depolama: localStorage
+- Styling: Tailwind CSS CDN veya Bootstrap CDN
+- İkonlar: Font Awesome CDN
+- Çalıştırma: Live Server (VS Code Extension) veya Python HTTP Server
+
+SEÇENEK 2 (Modern - Daha Gelişmiş):
+- Frontend: React + Vite (localhost:5173)
+- Veri Depolama: localStorage + Context API
+- Styling: Tailwind CSS
+- İkonlar: Lucide React
+- Çalıştırma: npm run dev
+
+SEÇENEK 3 (Orta Seviye):
+- Frontend: Vue.js 3 (localhost:5173)
+- Veri Depolama: localStorage + Pinia
+- Styling: Tailwind CSS
+- İkonlar: Vue Icons
+- Çalıştırma: npm run dev
+
+ÖNERİ: Seçenek 1 ile başla - Hızlı, basit ve backend gerektirmiyor!
+
+================================================================================
+LOCALHOST ÇALIŞTIRMA YÖNTEMLERİ
+================================================================================
+
+YÖNTEM 1 - VS Code Live Server (En Kolay):
+1. VS Code'da Live Server extension'ı yükle
+2. index.html'e sağ tık > "Open with Live Server"
+3. Otomatik olarak http://localhost:5500 açılır
+
+YÖNTEM 2 - Python HTTP Server:
+1. Proje klasöründe terminal aç
+2. Komut: python -m http.server 8000
+3. Tarayıcıda: http://localhost:8000
+
+YÖNTEM 3 - Node.js http-server:
+1. Komut: npx http-server -p 8080
+2. Tarayıcıda: http://localhost:8080
+
+YÖNTEM 4 - React/Vue (Eğer framework kullanırsan):
+1. Komut: npm run dev
+2. Tarayıcıda: http://localhost:5173
+
+================================================================================
+AI ARAÇLARI KULLANIM PLANI
+================================================================================
+
+KONSEPT GELİŞTİRME:
+- ChatGPT/Claude: Problem tanımı, kullanıcı profili, user journey
+- ChatGPT: Veritabanı şeması tasarımı
+
+GÖRSEL TASARIM:
+- DALL-E 3 / Midjourney: Ana sayfa mockup
+- Gemini Image: Dashboard ve profil sayfası tasarımları
+- Figma AI: Tasarım iyileştirme
+
+KOD GELİŞTİRME:
+- Cursor / GitHub Copilot: Kod yazımı
+- ChatGPT/Claude: Kod açıklamaları ve debugging
+- v0.dev: React component'leri (eğer React kullanırsan)
+
+İKON VE GÖRSELLER:
+- Lucide Icons / Font Awesome: Sosyal medya ikonları
+- Unsplash / Pexels: Stok görseller
+
+================================================================================
+VİZE HAZIRLIĞI İÇİN ÖNEMLİ NOTLAR
+================================================================================
+
+Vize için hazırlamanız gerekenler:
+1. Problem tanımı (AI ile yaz)
+2. Hedef kullanıcı profili (AI ile yaz)
+3. Kullanıcı yolculuğu diyagramı (AI ile oluştur)
+4. MVP özellikleri listesi
+5. En az 3 ekran tasarımı (AI ile görsel üret)
+   - Ana sayfa
+   - Dashboard
+   - Profil görüntüleme
+6. Her tasarım için kullanılan prompt'ları kaydet
+7. Master Prompt hazırla (sistem tasarımı için)
+
+================================================================================
+LOCALSTORAGE VERİ YAPISI ÖRNEĞİ
+================================================================================
+
+// users - Tüm kayıtlı kullanıcılar
+[
+  {
+    id: "user_1234567890",
+    username: "ahmet",
+    email: "ahmet@example.com",
+    password: "hashed_password", // Basit hash kullan
+    createdAt: "2026-03-13T10:30:00Z"
+  }
+]
+
+// currentUser - Aktif oturum
+{
+  id: "user_1234567890",
+  username: "ahmet",
+  email: "ahmet@example.com"
+}
+
+// links - Tüm kullanıcıların linkleri
+[
+  {
+    id: "link_1234567890",
+    userId: "user_1234567890",
+    platformName: "Instagram",
+    url: "https://instagram.com/ahmet",
+    icon: "instagram",
+    order: 1,
+    isActive: true
+  }
+]
+
+// profiles - Kullanıcı profil ayarları
+[
+  {
+    id: "profile_1234567890",
+    userId: "user_1234567890",
+    bio: "Merhaba! Ben Ahmet",
+    avatar: "data:image/base64...", // Base64 veya URL
+    theme: "light",
+    customUrl: "ahmet"
+  }
+]
+
+================================================================================
+LOCALSTORAGE AVANTAJLARI
+================================================================================
+✓ Backend gerektirmez
+✓ Hosting/domain gerektirmez
+✓ Hızlı geliştirme
+✓ Kolay test
+✓ Tarayıcıda çalışır
+✓ Ücretsiz
+
+================================================================================
+LOCALSTORAGE KISITLAMALARI (BİLİNMESİ GEREKENLER)
+================================================================================
+⚠ Veriler sadece o tarayıcıda saklanır
+⚠ Tarayıcı verilerini temizlersen kaybolur
+⚠ Maksimum 5-10 MB veri sınırı
+⚠ Başka cihazdan erişilemez
+⚠ Gerçek şifreleme yok (basit hash kullanılabilir)
+
+NOT: Proje için bu kısıtlamalar sorun değil, çünkü localhost demo amaçlı!
+================================================================================
+
+1. Bana "AŞAMA 1'e başlayalım" de
+2. Teknoloji stack'ini seç (yukarıdaki seçeneklerden)
+3. Her aşamayı tamamladıkça işaretle
+4. Bir sonraki aşamaya geçmek için onay ver
+
+================================================================================
+NOT: Bu yol haritası esnek bir plandır. İhtiyaçlarına göre özellik ekleyip
+çıkarabilirsin. Önemli olan çalışan bir MVP oluşturmak ve süreci iyi
+dokümante etmek!
+================================================================================
+
+
+================================================================================
+BAŞLAMAK İÇİN İLK ADIMLAR
+================================================================================
+
+1. Bana "AŞAMA 1'e başlayalım" de
+2. Teknoloji stack'ini seç (Seçenek 1 öneriyorum - Vanilla JS)
+3. Her aşamayı tamamladıkça işaretle
+4. Bir sonraki aşamaya geçmek için onay ver
+
+================================================================================
+PROJE KLASÖR YAPISI (ÖNERİLEN)
+================================================================================
+
+linkhub/
+│
+├── index.html              # Ana sayfa / Landing page
+├── register.html           # Kayıt sayfası
+├── login.html              # Giriş sayfası
+├── dashboard.html          # Kullanıcı dashboard
+├── profile.html            # Profil görüntüleme (/:username)
+│
+├── css/
+│   ├── style.css          # Ana stil dosyası
+│   ├── landing.css        # Ana sayfa stilleri
+│   ├── auth.css           # Kayıt/giriş stilleri
+│   └── dashboard.css      # Dashboard stilleri
+│
+├── js/
+│   ├── storage.js         # localStorage yönetimi
+│   ├── auth.js            # Kayıt/giriş fonksiyonları
+│   ├── links.js           # Link CRUD işlemleri
+│   ├── profile.js         # Profil işlemleri
+│   └── utils.js           # Yardımcı fonksiyonlar
+│
+├── assets/
+│   ├── images/            # Görseller
+│   └── icons/             # İkonlar (eğer local kullanırsan)
+│
+└── README.md              # Proje dokümantasyonu
+
+================================================================================
+GÜVENLİK ÖNERİLERİ (LOCALSTORAGE İÇİN)
+================================================================================
+
+1. Şifreleri basit hash ile sakla (örn: btoa() veya basit bir hash fonksiyonu)
+2. XSS saldırılarına karşı input sanitization yap
+3. Kullanıcı verilerini validate et
+4. localStorage'a hassas bilgi kaydetme (gerçek projede)
+
+NOT: Bu bir demo proje olduğu için basit güvenlik yeterli!
+
+================================================================================
+NOT: Bu yol haritası localhost ve localStorage için optimize edilmiştir.
+Backend, veritabanı veya hosting gerektirmez. Tüm veriler tarayıcıda saklanır.
+Proje tamamlandığında GitHub'a yüklenebilir ve GitHub Pages ile bile 
+yayınlanabilir (opsiyonel)!
+================================================================================
