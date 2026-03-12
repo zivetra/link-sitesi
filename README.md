@@ -28,20 +28,29 @@ LinkHub, kullanıcıların sosyal medya hesaplarını, web sitelerini ve önemli
 ## 🚀 Özellikler
 
 ### Kullanıcı Yönetimi
-- Kullanıcı kaydı ve girişi
-- Oturum yönetimi (localStorage)
-- Güvenli şifre saklama
+- ✅ Kullanıcı kaydı ve girişi
+- ✅ Oturum yönetimi (localStorage)
+- ✅ Güvenli şifre saklama
+- ✅ Form validasyonu
 
 ### Link Yönetimi
-- Sınırsız link ekleme
-- Link düzenleme ve silme
-- Link sıralama
-- Link aktif/pasif yapma
+- ✅ Sınırsız link ekleme
+- ✅ 13 farklı platform desteği (Instagram, Twitter, GitHub, vb.)
+- ✅ Platform seçimi (görsel butonlar)
+- ✅ Link düzenleme ve silme
+- ✅ **Drag & Drop ile sıralama**
+- ✅ Link aktif/pasif yapma
+- ✅ Renkli platform ikonları
 
 ### Profil
-- Özel kullanıcı URL'i (linkhub.com/username)
-- Profil görüntüleme sayfası
-- Minimal ve temiz tasarım
+- ✅ Özel kullanıcı URL'i (linkhub.com/username)
+- ✅ Profil görüntüleme sayfası
+- ✅ **Profil düzenleme sayfası**
+- ✅ **Bio ekleme/güncelleme**
+- ✅ **Tema seçimi (açık/koyu mod)**
+- ✅ Avatar gösterimi
+- ✅ Minimal ve temiz tasarım
+- ✅ Responsive tasarım
 
 ## 🛠️ Kullanılan Teknolojiler
 
@@ -86,8 +95,36 @@ npm run dev
 
 4. Tarayıcıda açın:
 ```
-http://localhost:5000
+http://localhost:5001
 ```
+
+## 📱 Kullanım Kılavuzu
+
+### Yeni Hesap Oluşturma
+1. http://localhost:5001/register adresine gidin
+2. Kullanıcı adı, email ve şifre girin
+3. "Hesap Oluştur" butonuna tıklayın
+4. Otomatik olarak dashboard'a yönlendirileceksiniz
+
+### Link Ekleme
+1. Dashboard'da "Link Ekle" butonuna tıklayın
+2. Platform seçin (Instagram, Twitter, GitHub, vb.)
+3. URL'nizi girin
+4. "Ekle" butonuna tıklayın
+
+### Link Sıralama
+- Linkleri sürükle-bırak ile yeniden sıralayın
+- Değişiklikler otomatik kaydedilir
+
+### Profil Düzenleme
+1. Dashboard'da "Profil Düzenle" butonuna tıklayın
+2. Bio ekleyin/güncelleyin (200 karakter)
+3. Tema seçin (açık/koyu)
+4. "Değişiklikleri Kaydet" butonuna tıklayın
+
+### Profil Görüntüleme
+- Dashboard'da "Görüntüle" butonuna tıklayın
+- Veya direkt: http://localhost:5001/kullaniciadi
 
 ## 🎨 Kullanılan AI Araçları
 
@@ -161,13 +198,20 @@ linkhub/
 │   │   ├── Register.jsx     # Kayıt sayfası
 │   │   ├── Login.jsx        # Giriş sayfası
 │   │   ├── Dashboard.jsx    # Link yönetimi
-│   │   └── Profile.jsx      # Profil görüntüleme
+│   │   ├── EditProfile.jsx  # Profil düzenleme
+│   │   ├── Profile.jsx      # Profil görüntüleme
+│   │   └── Test.jsx         # Test sayfası
 │   ├── utils/
-│   │   └── storage.js       # localStorage yönetimi
+│   │   ├── storage.js       # localStorage yönetimi
+│   │   └── platforms.js     # Platform bilgileri
 │   ├── App.jsx              # Ana uygulama
 │   ├── main.jsx             # Entry point
 │   └── index.css            # Global styles
 ├── public/
+├── ÖZELLIKLER.md                      # Detaylı özellik listesi
+├── PROJE_YOL_HARITASI.txt             # Proje yol haritası
+├── TAMAMLANDI.md                      # Tamamlanan özellikler
+├── PROJE_SURECI_VE_PROMPT_GECMISI.md  # Prompt geçmişi ve süreç
 ├── package.json
 ├── vite.config.js
 ├── tailwind.config.js
@@ -183,13 +227,20 @@ Projeyi test etmek için demo hesap kullanabilirsiniz:
 
 ## 🔮 Gelecek Vizyonu
 
-### Planlanan Özellikler
+### Tamamlanan Özellikler ✅
+- ✅ Drag & drop ile link sıralama
+- ✅ Sosyal medya platform ikonları (13 platform)
+- ✅ Tema sistemi (açık/koyu mod)
+- ✅ Profil düzenleme
+- ✅ Bio ekleme
+
+### Planlanan Özellikler (Opsiyonel)
 - Link tıklama istatistikleri
-- Özel tema renkleri
 - QR kod oluşturma
-- Profil fotoğrafı yükleme
-- Drag & drop ile link sıralama
-- Sosyal medya paylaşım butonları
+- Profil paylaşma butonu
+- Avatar yükleme (base64)
+- Link önizleme
+- Animasyonlar
 
 ### Potansiyel Geliştirmeler
 - Backend entegrasyonu (Node.js + MongoDB)

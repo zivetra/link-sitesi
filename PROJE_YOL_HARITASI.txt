@@ -31,81 +31,81 @@ AŞAMA 2: KONSEPT VE TASARIM (VİZE İÇİN ÖNEMLİ!)
 ================================================================================
 AŞAMA 3: LOCALSTORAGE VERİ YAPISI TASARIMI
 ================================================================================
-☐ 3.1 - localStorage veri modeli tasarla
+☑ 3.1 - localStorage veri modeli tasarla
       users: [{id, username, email, password, createdAt}]
-☐ 3.2 - Linkler veri modeli
+☑ 3.2 - Linkler veri modeli
       links: [{id, userId, platformName, url, icon, order, isActive}]
-☐ 3.3 - Profil ayarları veri modeli
+☑ 3.3 - Profil ayarları veri modeli
       profiles: [{id, userId, bio, avatar, theme, customUrl}]
-☐ 3.4 - Aktif kullanıcı oturumu (currentUser)
-☐ 3.5 - localStorage helper fonksiyonları planla
+☑ 3.4 - Aktif kullanıcı oturumu (currentUser)
+☑ 3.5 - localStorage helper fonksiyonları planla
 
 ================================================================================
 AŞAMA 4: LOCALSTORAGE YÖNETİMİ (BACKEND YERİNE)
 ================================================================================
-☐ 4.1 - localStorage helper class/module oluştur
-☐ 4.2 - Kullanıcı kayıt fonksiyonu (registerUser)
-☐ 4.3 - Kullanıcı giriş fonksiyonu (loginUser)
-☐ 4.4 - Oturum yönetimi (currentUser set/get/clear)
-☐ 4.5 - Link ekleme fonksiyonu (addLink)
-☐ 4.6 - Link güncelleme fonksiyonu (updateLink)
-☐ 4.7 - Link silme fonksiyonu (deleteLink)
-☐ 4.8 - Link listeleme fonksiyonu (getUserLinks)
-☐ 4.9 - Profil görüntüleme fonksiyonu (getProfile)
-☐ 4.10 - Profil güncelleme fonksiyonu (updateProfile)
-☐ 4.11 - Veri doğrulama (validation) fonksiyonları
+☑ 4.1 - localStorage helper class/module oluştur
+☑ 4.2 - Kullanıcı kayıt fonksiyonu (registerUser)
+☑ 4.3 - Kullanıcı giriş fonksiyonu (loginUser)
+☑ 4.4 - Oturum yönetimi (currentUser set/get/clear)
+☑ 4.5 - Link ekleme fonksiyonu (addLink)
+☑ 4.6 - Link güncelleme fonksiyonu (updateLink)
+☑ 4.7 - Link silme fonksiyonu (deleteLink)
+☑ 4.8 - Link listeleme fonksiyonu (getUserLinks)
+☑ 4.9 - Profil görüntüleme fonksiyonu (getProfile)
+☑ 4.10 - Profil güncelleme fonksiyonu (updateProfile)
+☑ 4.11 - Veri doğrulama (validation) fonksiyonları
 
 ================================================================================
 AŞAMA 5: FRONTEND GELİŞTİRME - KAYIT/GİRİŞ
 ================================================================================
-☐ 5.1 - Ana sayfa (landing page) oluştur
-☐ 5.2 - Kayıt formu sayfası
-☐ 5.3 - Giriş formu sayfası
-☐ 5.4 - Form validasyonu ekle
-☐ 5.5 - localStorage ile kayıt/giriş entegrasyonu
-☐ 5.6 - Hata mesajları gösterimi
-☐ 5.7 - Başarılı giriş sonrası yönlendirme
+☑ 5.1 - Ana sayfa (landing page) oluştur
+☑ 5.2 - Kayıt formu sayfası
+☑ 5.3 - Giriş formu sayfası
+☑ 5.4 - Form validasyonu ekle
+☑ 5.5 - localStorage ile kayıt/giriş entegrasyonu
+☑ 5.6 - Hata mesajları gösterimi
+☑ 5.7 - Başarılı giriş sonrası yönlendirme
 
 ================================================================================
 AŞAMA 6: FRONTEND GELİŞTİRME - DASHBOARD
 ================================================================================
-☐ 6.1 - Kullanıcı dashboard sayfası
-☐ 6.2 - Link ekleme formu
-☐ 6.3 - Link listesi görünümü
-☐ 6.4 - Link düzenleme özelliği
-☐ 6.5 - Link silme özelliği
-☐ 6.6 - Drag & drop ile sıralama (opsiyonel)
-☐ 6.7 - Link aktif/pasif toggle
+☑ 6.1 - Kullanıcı dashboard sayfası
+☑ 6.2 - Link ekleme formu
+☑ 6.3 - Link listesi görünümü
+☑ 6.4 - Link düzenleme özelliği
+☑ 6.5 - Link silme özelliği
+☑ 6.6 - Drag & drop ile sıralama
+☑ 6.7 - Link aktif/pasif toggle
 
 ================================================================================
 AŞAMA 7: FRONTEND GELİŞTİRME - PROFİL SAYFASI
 ================================================================================
-☐ 7.1 - Profil görüntüleme sayfası (/username)
-☐ 7.2 - Profil fotoğrafı gösterimi
-☐ 7.3 - Bio/açıklama gösterimi
-☐ 7.4 - Link kartları tasarımı
-☐ 7.5 - Sosyal medya ikonları
-☐ 7.6 - Responsive tasarım
-☐ 7.7 - Tema seçenekleri (açık/koyu mod)
+☑ 7.1 - Profil görüntüleme sayfası (/username)
+☑ 7.2 - Profil fotoğrafı gösterimi
+☑ 7.3 - Bio/açıklama gösterimi
+☑ 7.4 - Link kartları tasarımı
+☑ 7.5 - Sosyal medya ikonları
+☑ 7.6 - Responsive tasarım
+☑ 7.7 - Tema seçenekleri (açık/koyu mod)
 
 ================================================================================
 AŞAMA 8: SOSYAL MEDYA PLATFORMLARI
 ================================================================================
-☐ 8.1 - Popüler platformlar listesi hazırla
+☑ 8.1 - Popüler platformlar listesi hazırla
       (Instagram, Twitter, LinkedIn, GitHub, YouTube, TikTok, vb.)
-☐ 8.2 - Platform ikonları ekle
-☐ 8.3 - Platform renk şemaları
-☐ 8.4 - Özel link ekleme özelliği
+☑ 8.2 - Platform ikonları ekle
+☑ 8.3 - Platform renk şemaları
+☑ 8.4 - Özel link ekleme özelliği
 
 ================================================================================
 AŞAMA 9: EK ÖZELLİKLER (MVP SONRASI)
 ================================================================================
-☐ 9.1 - Profil fotoğrafı yükleme
-☐ 9.2 - Özel URL (custom slug) belirleme
-☐ 9.3 - Tema özelleştirme
+☑ 9.1 - Profil fotoğrafı yükleme (Avatar gösterimi)
+☑ 9.2 - Özel URL (custom slug) belirleme
+☑ 9.3 - Tema özelleştirme
 ☐ 9.4 - Link tıklama istatistikleri (opsiyonel)
-☐ 9.5 - QR kod oluşturma
-☐ 9.6 - Profil paylaşma butonu
+☐ 9.5 - QR kod oluşturma (opsiyonel)
+☐ 9.6 - Profil paylaşma butonu (opsiyonel)
 
 ================================================================================
 AŞAMA 10: TEST VE HATA AYIKLAMA
