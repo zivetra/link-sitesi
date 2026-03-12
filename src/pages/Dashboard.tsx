@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent, DragEvent } from 'react'
+import { useState, useEffect, DragEvent } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -38,7 +38,7 @@ export default function Dashboard() {
     setLinks(userLinks)
   }
 
-  const handleAddLink = (e: FormEvent<HTMLFormElement>) => {
+  const handleAddLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!newLink.platformName || !newLink.url || !user) return
 
