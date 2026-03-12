@@ -1,4 +1,37 @@
 import type { Platform } from '@/types';
+import { IconType } from 'react-icons';
+import { 
+  FaInstagram, 
+  FaTwitter, 
+  FaGithub, 
+  FaLinkedin, 
+  FaYoutube, 
+  FaTiktok, 
+  FaFacebook, 
+  FaTwitch, 
+  FaDiscord, 
+  FaSpotify,
+  FaGlobe,
+  FaEnvelope,
+  FaLink
+} from 'react-icons/fa';
+
+// Platform icon mapping
+export const PLATFORM_ICONS: Record<string, IconType> = {
+  instagram: FaInstagram,
+  twitter: FaTwitter,
+  github: FaGithub,
+  linkedin: FaLinkedin,
+  youtube: FaYoutube,
+  tiktok: FaTiktok,
+  facebook: FaFacebook,
+  twitch: FaTwitch,
+  discord: FaDiscord,
+  spotify: FaSpotify,
+  globe: FaGlobe,
+  mail: FaEnvelope,
+  link: FaLink
+};
 
 // Popüler sosyal medya platformları ve renkleri
 export const PLATFORMS: Platform[] = [
@@ -34,7 +67,7 @@ export const PLATFORMS: Platform[] = [
   },
   {
     name: 'TikTok',
-    icon: 'music',
+    icon: 'tiktok',
     color: '#000000',
     placeholder: 'https://tiktok.com/@kullaniciadi'
   },
@@ -52,13 +85,13 @@ export const PLATFORMS: Platform[] = [
   },
   {
     name: 'Discord',
-    icon: 'message-circle',
+    icon: 'discord',
     color: '#5865F2',
     placeholder: 'https://discord.gg/sunucuadi'
   },
   {
     name: 'Spotify',
-    icon: 'music',
+    icon: 'spotify',
     color: '#1DB954',
     placeholder: 'https://open.spotify.com/user/kullaniciadi'
   },
@@ -87,21 +120,7 @@ export const getPlatformInfo = (platformName: string): Platform => {
   return PLATFORMS.find(p => p.name === platformName) || PLATFORMS[PLATFORMS.length - 1];
 };
 
-// Icon adına göre Lucide icon component adı döndür
-export const getIconName = (iconName: string): string => {
-  const iconMap: Record<string, string> = {
-    'instagram': 'Instagram',
-    'twitter': 'Twitter',
-    'github': 'Github',
-    'linkedin': 'Linkedin',
-    'youtube': 'Youtube',
-    'music': 'Music',
-    'facebook': 'Facebook',
-    'twitch': 'Twitch',
-    'message-circle': 'MessageCircle',
-    'globe': 'Globe',
-    'mail': 'Mail',
-    'link': 'Link'
-  };
-  return iconMap[iconName] || 'Link';
+// Icon adına göre React Icon component döndür
+export const getPlatformIcon = (iconName: string): IconType => {
+  return PLATFORM_ICONS[iconName] || FaLink;
 };

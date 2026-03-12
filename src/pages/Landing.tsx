@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
-import { Link2, Sparkles, Zap, Shield } from 'lucide-react'
+import { FaLink, FaStar, FaBolt, FaShieldAlt } from 'react-icons/fa'
 
 export default function Landing() {
   return (
@@ -9,7 +9,7 @@ export default function Landing() {
       <header className="border-b sticky top-0 z-50 bg-white">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between max-w-6xl">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Link2 className="w-5 h-5 text-gray-900" />
+            <FaLink className="w-5 h-5 text-gray-900" />
             <span className="text-lg font-semibold text-gray-900">LinkHub</span>
           </Link>
           <div className="flex items-center gap-3">
@@ -27,7 +27,7 @@ export default function Landing() {
       <section className="container mx-auto px-6 py-24 max-w-4xl">
         <div className="text-center space-y-8">
           <div className="inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full text-sm">
-            <Sparkles className="w-3.5 h-3.5" />
+            <FaStar className="w-3.5 h-3.5" />
             Ücretsiz ve Sınırsız
           </div>
           
@@ -65,7 +65,7 @@ export default function Landing() {
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center space-y-3">
             <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
-              <Zap className="w-5 h-5 text-gray-900" />
+              <FaBolt className="w-5 h-5 text-gray-900" />
             </div>
             <h3 className="font-semibold text-gray-900">Hızlı Kurulum</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
@@ -75,7 +75,7 @@ export default function Landing() {
 
           <div className="text-center space-y-3">
             <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
-              <Link2 className="w-5 h-5 text-gray-900" />
+              <FaLink className="w-5 h-5 text-gray-900" />
             </div>
             <h3 className="font-semibold text-gray-900">Sınırsız Link</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
@@ -85,7 +85,7 @@ export default function Landing() {
 
           <div className="text-center space-y-3">
             <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
-              <Shield className="w-5 h-5 text-gray-900" />
+              <FaShieldAlt className="w-5 h-5 text-gray-900" />
             </div>
             <h3 className="font-semibold text-gray-900">Minimal Tasarım</h3>
             <p className="text-gray-600 text-sm leading-relaxed">

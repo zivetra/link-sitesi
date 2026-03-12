@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Link2, ExternalLink, Instagram, Twitter, Github, Linkedin, Youtube, Music, Facebook, MessageCircle, Globe, Mail } from 'lucide-react'
+import { FaLink, FaExternalLinkAlt } from 'react-icons/fa'
 import { getAllUsers, getUserLinks, getProfile } from '@/utils/storage'
-import { getPlatformInfo } from '@/utils/platforms'
+import { getPlatformInfo, getPlatformIcon } from '@/utils/platforms'
 import type { User, Profile as ProfileType, Link as LinkType } from '@/types'
-import type { LucideIcon } from 'lucide-react'
 
 export default function Profile() {
   const { username } = useParams<{ username: string }>()
@@ -15,23 +14,7 @@ export default function Profile() {
   const [links, setLinks] = useState<LinkType[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
-  const getIconComponent = (iconName: string): LucideIcon => {
-    const icons: Record<string, LucideIcon> = {
-      instagram: Instagram,
-      twitter: Twitter,
-      github: Github,
-      linkedin: Linkedin,
-      youtube: Youtube,
-      music: Music,
-      facebook: Facebook,
-      twitch: Music,
-      'message-circle': MessageCircle,
-      globe: Globe,
-      mail: Mail,
-      link: Link2
-    }
-    return icons[iconName] || Link2
-  }
+
 
   useEffect(() => {
     loadProfile()
@@ -77,7 +60,7 @@ export default function Profile() {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center p-4">
         <div className="text-center max-w-md">
-          <Link2 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <FaLink className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             Kullanıcı Bulunamadı
           </h1>
@@ -100,7 +83,7 @@ export default function Profile() {
       <header className={`border-b backdrop-blur-sm sticky top-0 z-50 ${isDark ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80'}`}>
         <div className="container mx-auto px-6 py-4 max-w-2xl">
           <Link to="/" className={`flex items-center gap-2 hover:opacity-80 transition-opacity ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            <Link2 className="w-5 h-5" />
+            <FaLink className="w-5 h-5" />
             <span className="text-lg font-semibold">LinkHub</span>
           </Link>
         </div>
@@ -137,13 +120,13 @@ export default function Profile() {
           {links.length === 0 ? (
             <Card className={isDark ? 'bg-gray-800 border-gray-700' : ''}>
               <CardContent className="pt-12 pb-12 text-center">
-                <Link2 className={`w-12 h-12 mx-auto mb-4 ${isDark ? 'text-gray-600' : 'text-gray-300'}`} />
+                <FaLink className={`w-12 h-12 mx-auto mb-4 ${isDark ? 'text-gray-600' : 'text-gray-300'}`} />
                 <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>Henüz link eklenmemiş</p>
               </CardContent>
             </Card>
           ) : (
             links.map((link) => {
-              const IconComponent = getIconComponent(link.icon)
+              const IconComponent = getPlatformIcon(link.platformName)
               const platformInfo = getPlatformInfo(link.platformName)
               return (
                 <a
@@ -174,7 +157,7 @@ export default function Profile() {
                             </p>
                           </div>
                         </div>
-                        <ExternalLink className={`w-5 h-5 flex-shrink-0 ml-4 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} />
+                        <FaExternalLinkAlt className={`w-5 h-5 flex-shrink-0 ml-4 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} />
                       </div>
                     </CardContent>
                   </Card>

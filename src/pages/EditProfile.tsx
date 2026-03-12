@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
-import { Link2, ArrowLeft, Save, Moon, Sun } from 'lucide-react'
+import { FaArrowLeft, FaSave, FaMoon, FaSun } from 'react-icons/fa'
 import { getCurrentUser, getProfile, updateProfile } from '@/utils/storage'
 import type { UserWithoutPassword } from '@/types'
 
@@ -74,7 +74,7 @@ export default function EditProfile() {
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between max-w-4xl">
           <Link to="/dashboard" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <ArrowLeft className="w-5 h-5 text-gray-900" />
+            <FaArrowLeft className="w-5 h-5 text-gray-900" />
             <span className="text-lg font-semibold text-gray-900">Dashboard'a Dön</span>
           </Link>
         </div>
@@ -140,7 +140,7 @@ export default function EditProfile() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <Sun className="w-5 h-5" />
+                    <FaSun className="w-5 h-5" />
                     <span className="font-medium">Açık Tema</span>
                   </button>
                   <button
@@ -152,7 +152,7 @@ export default function EditProfile() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <Moon className="w-5 h-5" />
+                    <FaMoon className="w-5 h-5" />
                     <span className="font-medium">Koyu Tema</span>
                   </button>
                 </div>
@@ -165,7 +165,7 @@ export default function EditProfile() {
                   className="flex-1 gap-2"
                   disabled={loading}
                 >
-                  <Save className="w-4 h-4" />
+                  <FaSave className="w-4 h-4" />
                   {loading ? 'Kaydediliyor...' : 'Değişiklikleri Kaydet'}
                 </Button>
                 <Button

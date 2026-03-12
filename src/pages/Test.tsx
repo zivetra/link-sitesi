@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { createDemoData, clearAllData, getAllUsers, getUserLinks, getProfile } from '@/utils/storage'
-import { RefreshCw, Trash2 } from 'lucide-react'
+import { FaSyncAlt, FaTrash } from 'react-icons/fa'
 import type { User, Link as LinkType, Profile } from '@/types'
 
 interface TestFeature {
@@ -89,15 +89,15 @@ export default function Test() {
           <CardContent className="space-y-4">
             <div className="flex gap-3">
               <Button onClick={handleCreateDemo} className="gap-2">
-                <RefreshCw className="w-4 h-4" />
+                <FaSyncAlt className="w-4 h-4" />
                 Demo Veri Oluştur
               </Button>
               <Button onClick={loadData} variant="outline" className="gap-2">
-                <RefreshCw className="w-4 h-4" />
+                <FaSyncAlt className="w-4 h-4" />
                 Verileri Yükle
               </Button>
               <Button onClick={handleClearData} variant="destructive" className="gap-2">
-                <Trash2 className="w-4 h-4" />
+                <FaTrash className="w-4 h-4" />
                 Tüm Verileri Temizle
               </Button>
             </div>

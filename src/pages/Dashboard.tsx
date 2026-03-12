@@ -4,11 +4,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Link2, Plus, Trash2, GripVertical, Eye, LogOut, ExternalLink, Settings, Instagram, Twitter, Github, Linkedin, Youtube, Music, Facebook, MessageCircle, Globe, Mail } from 'lucide-react'
 import { getCurrentUser, logoutUser, getUserLinks, addLink, deleteLink, toggleLinkStatus, reorderLinks } from '@/utils/storage'
-import { PLATFORMS, getPlatformInfo } from '@/utils/platforms'
+import { PLATFORMS, getPlatformInfo, getPlatformIcon } from '@/utils/platforms'
 import type { UserWithoutPassword, Link as LinkType, Platform } from '@/types'
-import type { LucideIcon } from 'lucide-react'
+import { FaLink, FaPlus, FaTrash, FaGripVertical, FaEye, FaSignOutAlt, FaExternalLinkAlt, FaCog } from 'react-icons/fa'
 
 interface NewLink {
   platformName: string;
@@ -86,24 +85,6 @@ export default function Dashboard() {
     setDraggedItem(null)
   }
 
-  const getIconComponent = (iconName: string): LucideIcon => {
-    const icons: Record<string, LucideIcon> = {
-      instagram: Instagram,
-      twitter: Twitter,
-      github: Github,
-      linkedin: Linkedin,
-      youtube: Youtube,
-      music: Music,
-      facebook: Facebook,
-      twitch: Music,
-      'message-circle': MessageCircle,
-      globe: Globe,
-      mail: Mail,
-      link: Link2
-    }
-    return icons[iconName] || Link2
-  }
-
   const handleDeleteLink = (linkId: string) => {
     if (!user) return
     if (confirm('Bu linki silmek istediğinize emin misiniz?')) {
@@ -131,24 +112,24 @@ export default function Dashboard() {
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between max-w-4xl">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Link2 className="w-5 h-5 text-gray-900" />
+            <FaLink className="w-5 h-5 text-gray-900" />
             <span className="text-lg font-semibold text-gray-900">LinkHub</span>
           </Link>
           <div className="flex items-center gap-3">
             <Link to="/edit-profile">
               <Button variant="outline" size="sm" className="gap-2">
-                <Settings className="w-4 h-4" />
+                <FaCog className="w-4 h-4" />
                 Profil Düzenle
               </Button>
             </Link>
             <Link to={`/${user.username}`}>
               <Button variant="outline" size="sm" className="gap-2">
-                <Eye className="w-4 h-4" />
+                <FaEye className="w-4 h-4" />
                 Görüntüle
               </Button>
             </Link>
             <Button variant="ghost" size="sm" onClick={handleLogout} className="gap-2">
-              <LogOut className="w-4 h-4" />
+              <FaSignOutAlt className="w-4 h-4" />
               Çıkış
             </Button>
           </div>
@@ -200,7 +181,7 @@ export default function Dashboard() {
               onClick={() => setShowAddForm(!showAddForm)}
               className="gap-2"
             >
-              <Plus className="w-4 h-4" />
+              <FaPlus className="w-4 h-4" />
               Link Ekle
             </Button>
           </CardHeader>
@@ -213,7 +194,7 @@ export default function Dashboard() {
                     <Label>Platform Seç</Label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {PLATFORMS.map((platform) => {
-                        const IconComponent = getIconComponent(platform.icon)
+                        const IconComponent = getPlatformIcon(platform.icon)
                         return (
                           <button
                             key={platform.name}
@@ -244,7 +225,7 @@ export default function Dashboard() {
                   <form onSubmit={handleAddLink} className="space-y-3">
                     <div className="flex items-center gap-2 pb-2 border-b">
                       {(() => {
-                        const IconComponent = getIconComponent(newLink.icon)
+                        const IconComponent = getPlatformIcon(newLink.icon)
                         return <IconComponent className="w-5 h-5" />
                       })()}
                       <span className="font-medium">{newLink.platformName}</span>
@@ -263,7 +244,7 @@ export default function Dashboard() {
                         type="url"
                         placeholder={getPlatformInfo(newLink.platformName).placeholder}
                         value={newLink.url}
-                        onChange={(e) => setNewLink({ ...newLink, url: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewLink({ ...newLink, url: e.target.value })}
                         autoFocus
                       />
                     </div>
@@ -289,7 +270,7 @@ export default function Dashboard() {
             {/* Links List */}
             {links.length === 0 ? (
               <div className="text-center py-12">
-                <Link2 className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                <FaLink className="w-12 h-12 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-600 mb-2">Henüz link eklemediniz</p>
                 <p className="text-sm text-gray-500">
                   "Link Ekle" butonuna tıklayarak ilk linkinizi ekleyin
@@ -298,7 +279,7 @@ export default function Dashboard() {
             ) : (
               <div className="space-y-2">
                 {links.map((link) => {
-                  const IconComponent = getIconComponent(link.icon)
+                  const IconComponent = getPlatformIcon(link.icon)
                   const platformInfo = getPlatformInfo(link.platformName)
                   return (
                     <div
@@ -311,7 +292,7 @@ export default function Dashboard() {
                         link.isActive ? 'bg-white hover:shadow-md' : 'bg-gray-50 opacity-60'
                       } ${draggedItem?.id === link.id ? 'opacity-50' : ''}`}
                     >
-                      <GripVertical className="w-4 h-4 text-gray-400" />
+                      <FaGripVertical className="w-4 h-4 text-gray-400" />
                       <IconComponent className="w-5 h-5 flex-shrink-0" style={{ color: platformInfo.color }} />
                       
                       <div className="flex-1 min-w-0">
@@ -326,7 +307,7 @@ export default function Dashboard() {
                           onClick={(e) => e.stopPropagation()}
                         >
                           {link.url}
-                          <ExternalLink className="w-3 h-3" />
+                          <FaExternalLinkAlt className="w-3 h-3" />
                         </a>
                       </div>
 
@@ -344,7 +325,7 @@ export default function Dashboard() {
                           onClick={() => handleDeleteLink(link.id)}
                           className="text-red-600 hover:text-red-700 hover:bg-red-50"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <FaTrash className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>

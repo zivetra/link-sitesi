@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Link2, AlertCircle } from 'lucide-react'
+import { FaLink, FaExclamationCircle } from 'react-icons/fa'
 import { loginUser } from '@/utils/storage'
 
 interface FormData {
@@ -60,7 +60,7 @@ export default function Login() {
         {/* Logo */}
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 text-xl font-semibold hover:opacity-80 transition-opacity">
-            <Link2 className="w-5 h-5 text-gray-900" />
+            <FaLink className="w-5 h-5 text-gray-900" />
             <span className="text-gray-900">LinkHub</span>
           </Link>
         </div>
@@ -79,7 +79,7 @@ export default function Login() {
               {/* Error Message */}
               {error && (
                 <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2 text-sm">
-                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  <FaExclamationCircle className="w-4 h-4 flex-shrink-0" />
                   <span>{error}</span>
                 </div>
               )}
