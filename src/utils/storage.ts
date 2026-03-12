@@ -1,5 +1,14 @@
-// localStorage Yönetim Sistemi
-// Tüm veri işlemleri bu dosya üzerinden yapılacak
+import type { 
+  User, 
+  UserWithoutPassword, 
+  Link, 
+  Profile, 
+  RegisterResponse, 
+  LoginResponse, 
+  LinkResponse, 
+  ProfileResponse,
+  ApiResponse 
+} from '@/types';
 
 // Storage Keys
 const STORAGE_KEYS = {
@@ -7,10 +16,10 @@ const STORAGE_KEYS = {
   CURRENT_USER: 'linkhub_current_user',
   LINKS: 'linkhub_links',
   PROFILES: 'linkhub_profiles'
-};
+} as const;
 
 // Helper: localStorage'dan veri al
-const getFromStorage = (key) => {
+const getFromStorage = <T>(key: string): T | null => {
   try {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : null;
@@ -21,7 +30,7 @@ const getFromStorage = (key) => {
 };
 
 // Helper: localStorage'a veri kaydet
-const saveToStorage = (key, data) => {
+const saveToStorage = <T>(key: string, data: T): boolean => {
   try {
     localStorage.setItem(key, JSON.stringify(data));
     return true;
@@ -32,18 +41,18 @@ const saveToStorage = (key, data) => {
 };
 
 // Helper: Unique ID oluştur
-const generateId = (prefix = 'id') => {
+const generateId = (prefix: string = 'id'): string => {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 };
 
 // Helper: Basit şifre hash (demo için)
-const hashPassword = (password) => {
+const hashPassword = (password: string): string => {
   // Gerçek projede bcrypt kullanılmalı, bu sadece demo için
   return btoa(password);
 };
 
 // Helper: Şifre doğrula
-const verifyPassword = (password, hashedPassword) => {
+const verifyPassword = (password: string, hashedPassword: string): boolean => {
   return btoa(password) === hashedPassword;
 };
 
@@ -52,12 +61,12 @@ const verifyPassword = (password, hashedPassword) => {
 // ============================================================================
 
 // Tüm kullanıcıları getir
-export const getAllUsers = () => {
-  return getFromStorage(STORAGE_KEYS.USERS) || [];
+export const getAllUsers = (): User[] => {
+  return getFromStorage<User[]>(STORAGE_KEYS.USERS) || [];
 };
 
 // Kullanıcı kayıt
-export const registerUser = (username, email, password) => {
+export const registerUser = (username: string, email: string, password: string): RegisterResponse => {
   const users = getAllUsers();
   
   // Kullanıcı adı kontrolü
@@ -71,7 +80,7 @@ export const registerUser = (username, email, password) => {
   }
   
   // Yeni kullanıcı oluştur
-  const newUser = {
+  const newUser: User = {
     id: generateId('user'),
     username,
     email,
@@ -89,7 +98,7 @@ export const registerUser = (username, email, password) => {
 };
 
 // Kullanıcı giriş
-export const loginUser = (usernameOrEmail, password) => {
+export const loginUser = (usernameOrEmail: string, password: string): LoginResponse => {
   const users = getAllUsers();
   
   const user = users.find(u => 
@@ -114,18 +123,18 @@ export const loginUser = (usernameOrEmail, password) => {
 };
 
 // Çıkış yap
-export const logoutUser = () => {
+export const logoutUser = (): ApiResponse => {
   localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
   return { success: true, message: 'Çıkış yapıldı' };
 };
 
 // Aktif kullanıcıyı getir
-export const getCurrentUser = () => {
-  return getFromStorage(STORAGE_KEYS.CURRENT_USER);
+export const getCurrentUser = (): UserWithoutPassword | null => {
+  return getFromStorage<UserWithoutPassword>(STORAGE_KEYS.CURRENT_USER);
 };
 
 // Kullanıcı oturum kontrolü
-export const isAuthenticated = () => {
+export const isAuthenticated = (): boolean => {
   return getCurrentUser() !== null;
 };
 
@@ -134,15 +143,15 @@ export const isAuthenticated = () => {
 // ============================================================================
 
 // Tüm profilleri getir
-const getAllProfiles = () => {
-  return getFromStorage(STORAGE_KEYS.PROFILES) || [];
+const getAllProfiles = (): Profile[] => {
+  return getFromStorage<Profile[]>(STORAGE_KEYS.PROFILES) || [];
 };
 
 // Profil oluştur
-const createProfile = (userId, username) => {
+const createProfile = (userId: string, username: string): Profile => {
   const profiles = getAllProfiles();
   
-  const newProfile = {
+  const newProfile: Profile = {
     id: generateId('profile'),
     userId,
     bio: '',
@@ -158,13 +167,13 @@ const createProfile = (userId, username) => {
 };
 
 // Profil getir
-export const getProfile = (userId) => {
+export const getProfile = (userId: string): Profile | null => {
   const profiles = getAllProfiles();
-  return profiles.find(p => p.userId === userId);
+  return profiles.find(p => p.userId === userId) || null;
 };
 
 // Username'e göre profil getir
-export const getProfileByUsername = (username) => {
+export const getProfileByUsername = (username: string): Profile | null => {
   const users = getAllUsers();
   const user = users.find(u => u.username === username);
   
@@ -174,7 +183,7 @@ export const getProfileByUsername = (username) => {
 };
 
 // Profil güncelle
-export const updateProfile = (userId, updates) => {
+export const updateProfile = (userId: string, updates: Partial<Profile>): ProfileResponse => {
   const profiles = getAllProfiles();
   const index = profiles.findIndex(p => p.userId === userId);
   
@@ -193,22 +202,22 @@ export const updateProfile = (userId, updates) => {
 // ============================================================================
 
 // Tüm linkleri getir
-const getAllLinks = () => {
-  return getFromStorage(STORAGE_KEYS.LINKS) || [];
+const getAllLinks = (): Link[] => {
+  return getFromStorage<Link[]>(STORAGE_KEYS.LINKS) || [];
 };
 
 // Kullanıcının linklerini getir
-export const getUserLinks = (userId) => {
+export const getUserLinks = (userId: string): Link[] => {
   const links = getAllLinks();
   return links.filter(l => l.userId === userId).sort((a, b) => a.order - b.order);
 };
 
 // Link ekle
-export const addLink = (userId, platformName, url, icon = '') => {
+export const addLink = (userId: string, platformName: string, url: string, icon: string = ''): LinkResponse => {
   const links = getAllLinks();
   const userLinks = getUserLinks(userId);
   
-  const newLink = {
+  const newLink: Link = {
     id: generateId('link'),
     userId,
     platformName,
@@ -226,7 +235,7 @@ export const addLink = (userId, platformName, url, icon = '') => {
 };
 
 // Link güncelle
-export const updateLink = (linkId, updates) => {
+export const updateLink = (linkId: string, updates: Partial<Link>): LinkResponse => {
   const links = getAllLinks();
   const index = links.findIndex(l => l.id === linkId);
   
@@ -241,7 +250,7 @@ export const updateLink = (linkId, updates) => {
 };
 
 // Link sil
-export const deleteLink = (linkId) => {
+export const deleteLink = (linkId: string): ApiResponse => {
   const links = getAllLinks();
   const filteredLinks = links.filter(l => l.id !== linkId);
   
@@ -251,7 +260,7 @@ export const deleteLink = (linkId) => {
 };
 
 // Link sırasını güncelle
-export const reorderLinks = (userId, linkIds) => {
+export const reorderLinks = (userId: string, linkIds: string[]): ApiResponse => {
   const links = getAllLinks();
   
   linkIds.forEach((linkId, index) => {
@@ -267,7 +276,7 @@ export const reorderLinks = (userId, linkIds) => {
 };
 
 // Link aktif/pasif durumunu değiştir
-export const toggleLinkStatus = (linkId) => {
+export const toggleLinkStatus = (linkId: string): LinkResponse => {
   const links = getAllLinks();
   const index = links.findIndex(l => l.id === linkId);
   
@@ -285,9 +294,9 @@ export const toggleLinkStatus = (linkId) => {
 // DEMO VERİ OLUŞTURMA (Geliştirme için)
 // ============================================================================
 
-export const createDemoData = () => {
+export const createDemoData = (): void => {
   // Demo kullanıcı
-  const demoUser = {
+  const demoUser: User = {
     id: 'user_demo_123',
     username: 'demo',
     email: 'demo@linkhub.com',
@@ -298,7 +307,7 @@ export const createDemoData = () => {
   saveToStorage(STORAGE_KEYS.USERS, [demoUser]);
   
   // Demo profil
-  const demoProfile = {
+  const demoProfile: Profile = {
     id: 'profile_demo_123',
     userId: demoUser.id,
     bio: 'Merhaba! Ben demo kullanıcısıyım 👋',
@@ -310,7 +319,7 @@ export const createDemoData = () => {
   saveToStorage(STORAGE_KEYS.PROFILES, [demoProfile]);
   
   // Demo linkler
-  const demoLinks = [
+  const demoLinks: Link[] = [
     {
       id: 'link_demo_1',
       userId: demoUser.id,
@@ -349,7 +358,7 @@ export const createDemoData = () => {
 };
 
 // Tüm verileri temizle (geliştirme için)
-export const clearAllData = () => {
+export const clearAllData = (): void => {
   Object.values(STORAGE_KEYS).forEach(key => {
     localStorage.removeItem(key);
   });

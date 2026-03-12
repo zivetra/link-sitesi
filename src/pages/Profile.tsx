@@ -5,16 +5,18 @@ import { Button } from '@/components/ui/button'
 import { Link2, ExternalLink, Instagram, Twitter, Github, Linkedin, Youtube, Music, Facebook, MessageCircle, Globe, Mail } from 'lucide-react'
 import { getAllUsers, getUserLinks, getProfile } from '@/utils/storage'
 import { getPlatformInfo } from '@/utils/platforms'
+import type { User, Profile as ProfileType, Link as LinkType } from '@/types'
+import type { LucideIcon } from 'lucide-react'
 
 export default function Profile() {
-  const { username } = useParams()
-  const [user, setUser] = useState(null)
-  const [profile, setProfile] = useState(null)
-  const [links, setLinks] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { username } = useParams<{ username: string }>()
+  const [user, setUser] = useState<User | null>(null)
+  const [profile, setProfile] = useState<ProfileType | null>(null)
+  const [links, setLinks] = useState<LinkType[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
-  const getIconComponent = (iconName) => {
-    const icons = {
+  const getIconComponent = (iconName: string): LucideIcon => {
+    const icons: Record<string, LucideIcon> = {
       instagram: Instagram,
       twitter: Twitter,
       github: Github,
@@ -36,6 +38,11 @@ export default function Profile() {
   }, [username])
 
   const loadProfile = () => {
+    if (!username) {
+      setLoading(false)
+      return
+    }
+
     // Kullanıcıyı bul
     const users = getAllUsers()
     const foundUser = users.find(u => u.username === username)

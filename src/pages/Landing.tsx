@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
 import { Link2, Sparkles, Zap, Shield } from 'lucide-react'
 

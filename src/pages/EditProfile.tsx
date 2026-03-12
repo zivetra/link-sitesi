@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Link2, ArrowLeft, Save, Moon, Sun } from 'lucide-react'
 import { getCurrentUser, getProfile, updateProfile } from '@/utils/storage'
+import type { UserWithoutPassword } from '@/types'
+
+interface FormData {
+  bio: string;
+  theme: 'light' | 'dark';
+}
 
 export default function EditProfile() {
   const navigate = useNavigate()
-  const [user, setUser] = useState(null)
-  const [formData, setFormData] = useState({
+  const [user, setUser] = useState<UserWithoutPassword | null>(null)
+  const [formData, setFormData] = useState<FormData>({
     bio: '',
     theme: 'light'
   })
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [success, setSuccess] = useState<boolean>(false)
 
   useEffect(() => {
     const currentUser = getCurrentUser()
@@ -35,15 +40,17 @@ export default function EditProfile() {
     }
   }, [navigate])
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!user) return
+    
     setLoading(true)
     setSuccess(false)
 
@@ -107,13 +114,13 @@ export default function EditProfile() {
                 <textarea
                   id="bio"
                   name="bio"
-                  rows="4"
+                  rows={4}
                   placeholder="Kendiniz hakkında kısa bir açıklama yazın..."
                   value={formData.bio}
                   onChange={handleChange}
                   disabled={loading}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none"
-                  maxLength="200"
+                  maxLength={200}
                 />
                 <p className="text-xs text-gray-500">
                   {formData.bio.length}/200 karakter

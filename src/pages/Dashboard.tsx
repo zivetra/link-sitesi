@@ -1,20 +1,28 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FormEvent, DragEvent } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Link2, Plus, Trash2, GripVertical, Eye, LogOut, ExternalLink, Settings, Instagram, Twitter, Github, Linkedin, Youtube, Music, Facebook, MessageCircle, Globe, Mail } from 'lucide-react'
-import { getCurrentUser, logoutUser, getUserLinks, addLink, deleteLink, updateLink, toggleLinkStatus, reorderLinks } from '@/utils/storage'
+import { getCurrentUser, logoutUser, getUserLinks, addLink, deleteLink, toggleLinkStatus, reorderLinks } from '@/utils/storage'
 import { PLATFORMS, getPlatformInfo } from '@/utils/platforms'
+import type { UserWithoutPassword, Link as LinkType, Platform } from '@/types'
+import type { LucideIcon } from 'lucide-react'
+
+interface NewLink {
+  platformName: string;
+  url: string;
+  icon: string;
+}
 
 export default function Dashboard() {
   const navigate = useNavigate()
-  const [user, setUser] = useState(null)
-  const [links, setLinks] = useState([])
-  const [showAddForm, setShowAddForm] = useState(false)
-  const [newLink, setNewLink] = useState({ platformName: '', url: '', icon: '' })
-  const [draggedItem, setDraggedItem] = useState(null)
+  const [user, setUser] = useState<UserWithoutPassword | null>(null)
+  const [links, setLinks] = useState<LinkType[]>([])
+  const [showAddForm, setShowAddForm] = useState<boolean>(false)
+  const [newLink, setNewLink] = useState<NewLink>({ platformName: '', url: '', icon: '' })
+  const [draggedItem, setDraggedItem] = useState<LinkType | null>(null)
 
   useEffect(() => {
     const currentUser = getCurrentUser()
@@ -26,14 +34,14 @@ export default function Dashboard() {
     loadLinks(currentUser.id)
   }, [navigate])
 
-  const loadLinks = (userId) => {
+  const loadLinks = (userId: string) => {
     const userLinks = getUserLinks(userId)
     setLinks(userLinks)
   }
 
-  const handleAddLink = (e) => {
+  const handleAddLink = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!newLink.platformName || !newLink.url) return
+    if (!newLink.platformName || !newLink.url || !user) return
 
     const platformInfo = getPlatformInfo(newLink.platformName)
     const result = addLink(user.id, newLink.platformName, newLink.url, platformInfo.icon)
@@ -44,7 +52,7 @@ export default function Dashboard() {
     }
   }
 
-  const handlePlatformSelect = (platform) => {
+  const handlePlatformSelect = (platform: Platform) => {
     setNewLink({
       platformName: platform.name,
       url: '',
@@ -52,19 +60,19 @@ export default function Dashboard() {
     })
   }
 
-  const handleDragStart = (e, link) => {
+  const handleDragStart = (e: DragEvent<HTMLDivElement>, link: LinkType) => {
     setDraggedItem(link)
     e.dataTransfer.effectAllowed = 'move'
   }
 
-  const handleDragOver = (e) => {
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     e.dataTransfer.dropEffect = 'move'
   }
 
-  const handleDrop = (e, targetLink) => {
+  const handleDrop = (e: DragEvent<HTMLDivElement>, targetLink: LinkType) => {
     e.preventDefault()
-    if (!draggedItem || draggedItem.id === targetLink.id) return
+    if (!draggedItem || draggedItem.id === targetLink.id || !user) return
 
     const newLinks = [...links]
     const draggedIndex = newLinks.findIndex(l => l.id === draggedItem.id)
@@ -78,8 +86,8 @@ export default function Dashboard() {
     setDraggedItem(null)
   }
 
-  const getIconComponent = (iconName) => {
-    const icons = {
+  const getIconComponent = (iconName: string): LucideIcon => {
+    const icons: Record<string, LucideIcon> = {
       instagram: Instagram,
       twitter: Twitter,
       github: Github,
@@ -96,14 +104,16 @@ export default function Dashboard() {
     return icons[iconName] || Link2
   }
 
-  const handleDeleteLink = (linkId) => {
+  const handleDeleteLink = (linkId: string) => {
+    if (!user) return
     if (confirm('Bu linki silmek istediğinize emin misiniz?')) {
       deleteLink(linkId)
       loadLinks(user.id)
     }
   }
 
-  const handleToggleLink = (linkId) => {
+  const handleToggleLink = (linkId: string) => {
+    if (!user) return
     toggleLinkStatus(linkId)
     loadLinks(user.id)
   }

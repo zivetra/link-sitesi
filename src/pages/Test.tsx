@@ -4,12 +4,19 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { createDemoData, clearAllData, getAllUsers, getUserLinks, getProfile } from '@/utils/storage'
 import { RefreshCw, Trash2 } from 'lucide-react'
+import type { User, Link as LinkType, Profile } from '@/types'
+
+interface TestFeature {
+  name: string;
+  path: string;
+  status: string;
+}
 
 export default function Test() {
-  const [status, setStatus] = useState('')
-  const [users, setUsers] = useState([])
-  const [links, setLinks] = useState([])
-  const [profiles, setProfiles] = useState([])
+  const [status, setStatus] = useState<string>('')
+  const [users, setUsers] = useState<User[]>([])
+  const [links, setLinks] = useState<LinkType[]>([])
+  const [profiles, setProfiles] = useState<Profile[]>([])
 
   const handleCreateDemo = () => {
     createDemoData()
@@ -39,7 +46,7 @@ export default function Test() {
     }
   }
 
-  const testFeatures = [
+  const testFeatures: TestFeature[] = [
     { name: 'Kullanıcı Kaydı', path: '/register', status: '✅' },
     { name: 'Kullanıcı Girişi', path: '/login', status: '✅' },
     { name: 'Dashboard', path: '/dashboard', status: '✅' },

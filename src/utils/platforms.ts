@@ -1,5 +1,7 @@
+import type { Platform } from '@/types';
+
 // Popüler sosyal medya platformları ve renkleri
-export const PLATFORMS = [
+export const PLATFORMS: Platform[] = [
   {
     name: 'Instagram',
     icon: 'instagram',
@@ -81,13 +83,13 @@ export const PLATFORMS = [
 ];
 
 // Platform adına göre bilgi getir
-export const getPlatformInfo = (platformName) => {
+export const getPlatformInfo = (platformName: string): Platform => {
   return PLATFORMS.find(p => p.name === platformName) || PLATFORMS[PLATFORMS.length - 1];
 };
 
 // Icon adına göre Lucide icon component adı döndür
-export const getIconName = (iconName) => {
-  const iconMap = {
+export const getIconName = (iconName: string): string => {
+  const iconMap: Record<string, string> = {
     'instagram': 'Instagram',
     'twitter': 'Twitter',
     'github': 'Github',
