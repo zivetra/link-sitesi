@@ -55,21 +55,21 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 text-xl font-semibold hover:opacity-80 transition-opacity">
-            <FaLink className="w-5 h-5 text-gray-900" />
-            <span className="text-gray-900">LinkHub</span>
+            <FaLink className="w-5 h-5 text-white" />
+            <span className="text-white">LinkHub</span>
           </Link>
         </div>
 
         {/* Form Card */}
-        <Card className="border shadow-sm">
+        <Card className="border border-white/10 shadow-sm bg-white/5 backdrop-blur-md">
           <CardHeader className="text-center space-y-2">
-            <CardTitle className="text-2xl font-bold">Giriş Yap</CardTitle>
-            <CardDescription className="text-gray-600">
+            <CardTitle className="text-2xl font-bold text-white">Giriş Yap</CardTitle>
+            <CardDescription className="text-white/70">
               Hesabınıza giriş yapın ve linklerinizi yönetin
             </CardDescription>
           </CardHeader>
@@ -78,7 +78,7 @@ export default function Login() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Error Message */}
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2 text-sm">
+                <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-lg flex items-center gap-2 text-sm">
                   <FaExclamationCircle className="w-4 h-4 flex-shrink-0" />
                   <span>{error}</span>
                 </div>
@@ -86,7 +86,7 @@ export default function Login() {
 
               {/* Username or Email */}
               <div className="space-y-2">
-                <Label htmlFor="usernameOrEmail" className="text-sm font-medium">Kullanıcı Adı veya Email</Label>
+                <Label htmlFor="usernameOrEmail" className="text-sm font-medium text-white">Kullanıcı Adı veya Email</Label>
                 <Input
                   id="usernameOrEmail"
                   name="usernameOrEmail"
@@ -101,7 +101,7 @@ export default function Login() {
 
               {/* Password */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium">Şifre</Label>
+                <Label htmlFor="password" className="text-sm font-medium text-white">Şifre</Label>
                 <Input
                   id="password"
                   name="password"
@@ -117,7 +117,7 @@ export default function Login() {
               {/* Submit Button */}
               <Button 
                 type="submit" 
-                className="w-full h-10 bg-gray-900 hover:bg-gray-800" 
+                className="w-full h-10 bg-white text-black hover:bg-white/90" 
                 disabled={loading}
               >
                 {loading ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
@@ -125,16 +125,16 @@ export default function Login() {
             </form>
 
             {/* Demo Account Info */}
-            <div className="mt-4 p-3 bg-gray-50 border rounded-lg">
-              <p className="text-xs text-gray-700 font-medium mb-1">Demo Hesap:</p>
-              <p className="text-xs text-gray-600">Kullanıcı: demo</p>
-              <p className="text-xs text-gray-600">Şifre: demo123</p>
+            <div className="mt-4 p-3 bg-white/10 border border-white/20 rounded-lg">
+              <p className="text-xs text-white font-medium mb-1">Demo Hesap:</p>
+              <p className="text-xs text-white/70">Kullanıcı: demo</p>
+              <p className="text-xs text-white/70">Şifre: demo123</p>
             </div>
 
             {/* Register Link */}
-            <div className="mt-6 text-center text-sm text-gray-600">
+            <div className="mt-6 text-center text-sm text-white/70">
               Hesabınız yok mu?{' '}
-              <Link to="/register" className="text-gray-900 hover:underline font-medium">
+              <Link to="/register" className="text-white hover:underline font-medium">
                 Hesap Oluşturun
               </Link>
             </div>
@@ -143,7 +143,7 @@ export default function Login() {
 
         {/* Back to Home */}
         <div className="text-center">
-          <Link to="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+          <Link to="/" className="text-sm text-white/70 hover:text-white transition-colors">
             ← Ana Sayfaya Dön
           </Link>
         </div>

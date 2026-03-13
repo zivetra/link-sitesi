@@ -86,21 +86,21 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 text-xl font-semibold hover:opacity-80 transition-opacity">
-            <FaLink className="w-5 h-5 text-gray-900" />
-            <span className="text-gray-900">LinkHub</span>
+            <FaLink className="w-5 h-5 text-white" />
+            <span className="text-white">LinkHub</span>
           </Link>
         </div>
 
         {/* Form Card */}
-        <Card className="border shadow-sm">
+        <Card className="border border-white/10 shadow-sm bg-white/5 backdrop-blur-md">
           <CardHeader className="text-center space-y-2">
-            <CardTitle className="text-2xl font-bold">Hesap Oluştur</CardTitle>
-            <CardDescription className="text-gray-600">
+            <CardTitle className="text-2xl font-bold text-white">Hesap Oluştur</CardTitle>
+            <CardDescription className="text-white/70">
               Ücretsiz hesabınızı oluşturun ve linklerinizi paylaşmaya başlayın
             </CardDescription>
           </CardHeader>
@@ -109,7 +109,7 @@ export default function Register() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Error Message */}
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2 text-sm">
+                <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-lg flex items-center gap-2 text-sm">
                   <FaExclamationCircle className="w-4 h-4 flex-shrink-0" />
                   <span>{error}</span>
                 </div>
@@ -117,7 +117,7 @@ export default function Register() {
 
               {/* Username */}
               <div className="space-y-2">
-                <Label htmlFor="username" className="text-sm font-medium">Kullanıcı Adı</Label>
+                <Label htmlFor="username" className="text-sm font-medium text-white">Kullanıcı Adı</Label>
                 <Input
                   id="username"
                   name="username"
@@ -128,14 +128,14 @@ export default function Register() {
                   disabled={loading}
                   className="h-10"
                 />
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-white/60">
                   Profiliniz: linkhub.com/{formData.username || 'kullaniciadi'}
                 </p>
               </div>
 
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+                <Label htmlFor="email" className="text-sm font-medium text-white">Email</Label>
                 <Input
                   id="email"
                   name="email"
@@ -150,7 +150,7 @@ export default function Register() {
 
               {/* Password */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium">Şifre</Label>
+                <Label htmlFor="password" className="text-sm font-medium text-white">Şifre</Label>
                 <Input
                   id="password"
                   name="password"
@@ -165,7 +165,7 @@ export default function Register() {
 
               {/* Confirm Password */}
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-sm font-medium">Şifre Tekrar</Label>
+                <Label htmlFor="confirmPassword" className="text-sm font-medium text-white">Şifre Tekrar</Label>
                 <Input
                   id="confirmPassword"
                   name="confirmPassword"
@@ -181,7 +181,7 @@ export default function Register() {
               {/* Submit Button */}
               <Button 
                 type="submit" 
-                className="w-full h-10 bg-gray-900 hover:bg-gray-800" 
+                className="w-full h-10 bg-white text-black hover:bg-white/90" 
                 disabled={loading}
               >
                 {loading ? 'Hesap Oluşturuluyor...' : 'Hesap Oluştur'}
@@ -189,9 +189,9 @@ export default function Register() {
             </form>
 
             {/* Login Link */}
-            <div className="mt-6 text-center text-sm text-gray-600">
+            <div className="mt-6 text-center text-sm text-white/70">
               Zaten hesabınız var mı?{' '}
-              <Link to="/login" className="text-gray-900 hover:underline font-medium">
+              <Link to="/login" className="text-white hover:underline font-medium">
                 Giriş Yapın
               </Link>
             </div>
@@ -200,7 +200,7 @@ export default function Register() {
 
         {/* Back to Home */}
         <div className="text-center">
-          <Link to="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+          <Link to="/" className="text-sm text-white/70 hover:text-white transition-colors">
             ← Ana Sayfaya Dön
           </Link>
         </div>

@@ -107,28 +107,28 @@ export default function Dashboard() {
   if (!user) return null
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-white border-b sticky top-0 z-50">
+      <header className="bg-black/50 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between max-w-4xl">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <FaLink className="w-5 h-5 text-gray-900" />
-            <span className="text-lg font-semibold text-gray-900">LinkHub</span>
+            <FaLink className="w-5 h-5 text-white" />
+            <span className="text-lg font-semibold text-white">LinkHub</span>
           </Link>
           <div className="flex items-center gap-3">
             <Link to="/edit-profile">
-              <Button variant="outline" size="sm" className="gap-2">
+              <Button variant="outline" size="sm" className="gap-2 border-white/20 text-white hover:bg-white/10">
                 <FaCog className="w-4 h-4" />
                 Profil Düzenle
               </Button>
             </Link>
             <Link to={`/${user.username}`}>
-              <Button variant="outline" size="sm" className="gap-2">
+              <Button variant="outline" size="sm" className="gap-2 border-white/20 text-white hover:bg-white/10">
                 <FaEye className="w-4 h-4" />
                 Görüntüle
               </Button>
             </Link>
-            <Button variant="ghost" size="sm" onClick={handleLogout} className="gap-2">
+            <Button variant="ghost" size="sm" onClick={handleLogout} className="gap-2 text-white hover:bg-white/10">
               <FaSignOutAlt className="w-4 h-4" />
               Çıkış
             </Button>
@@ -140,27 +140,28 @@ export default function Dashboard() {
       <main className="container mx-auto px-6 py-8 max-w-4xl">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-white mb-2">
             Hoş geldin, {user.username}!
           </h1>
-          <p className="text-gray-600">
+          <p className="text-white/70">
             Linklerini yönet ve profilini özelleştir
           </p>
         </div>
 
         {/* Profile URL */}
-        <Card className="mb-6">
+        <Card className="mb-6 bg-white/5 border-white/10">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Profil URL'in:</p>
-                <p className="text-lg font-mono text-gray-900">
+                <p className="text-sm text-white/70 mb-1">Profil URL'in:</p>
+                <p className="text-lg font-mono text-white">
                   linkhub.com/{user.username}
                 </p>
               </div>
               <Button
                 variant="outline"
                 size="sm"
+                className="border-white/20 text-white hover:bg-white/10"
                 onClick={() => {
                   navigator.clipboard.writeText(`linkhub.com/${user.username}`)
                   alert('URL kopyalandı!')
@@ -173,13 +174,13 @@ export default function Dashboard() {
         </Card>
 
         {/* Links Section */}
-        <Card>
+        <Card className="bg-white/5 border-white/10">
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Linklerim ({links.length})</CardTitle>
+            <CardTitle className="text-white">Linklerim ({links.length})</CardTitle>
             <Button
               size="sm"
               onClick={() => setShowAddForm(!showAddForm)}
-              className="gap-2"
+              className="gap-2 bg-white text-black hover:bg-white/90"
             >
               <FaPlus className="w-4 h-4" />
               Link Ekle
@@ -188,10 +189,10 @@ export default function Dashboard() {
           <CardContent className="space-y-4">
             {/* Add Link Form */}
             {showAddForm && (
-              <div className="p-4 bg-gray-50 rounded-lg space-y-4">
+              <div className="p-4 bg-white/10 rounded-lg space-y-4">
                 {!newLink.platformName ? (
                   <>
-                    <Label>Platform Seç</Label>
+                    <Label className="text-white">Platform Seç</Label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {PLATFORMS.map((platform) => {
                         const IconComponent = getPlatformIcon(platform.icon)
@@ -200,10 +201,10 @@ export default function Dashboard() {
                             key={platform.name}
                             type="button"
                             onClick={() => handlePlatformSelect(platform)}
-                            className="p-3 border-2 border-gray-200 rounded-lg hover:border-gray-900 transition-colors flex items-center gap-2 text-left"
+                            className="p-3 border-2 border-white/20 rounded-lg hover:border-white/40 transition-colors flex items-center gap-2 text-left bg-white/5"
                           >
                             <IconComponent className="w-5 h-5" style={{ color: platform.color }} />
-                            <span className="text-sm font-medium">{platform.name}</span>
+                            <span className="text-sm font-medium text-white">{platform.name}</span>
                           </button>
                         )
                       })}
@@ -216,29 +217,29 @@ export default function Dashboard() {
                         setShowAddForm(false)
                         setNewLink({ platformName: '', url: '', icon: '' })
                       }}
-                      className="w-full"
+                      className="w-full border-white/20 text-white hover:bg-white/10"
                     >
                       İptal
                     </Button>
                   </>
                 ) : (
                   <form onSubmit={handleAddLink} className="space-y-3">
-                    <div className="flex items-center gap-2 pb-2 border-b">
+                    <div className="flex items-center gap-2 pb-2 border-b border-white/20">
                       {(() => {
                         const IconComponent = getPlatformIcon(newLink.icon)
-                        return <IconComponent className="w-5 h-5" />
+                        return <IconComponent className="w-5 h-5 text-white" />
                       })()}
-                      <span className="font-medium">{newLink.platformName}</span>
+                      <span className="font-medium text-white">{newLink.platformName}</span>
                       <button
                         type="button"
                         onClick={() => setNewLink({ platformName: '', url: '', icon: '' })}
-                        className="ml-auto text-sm text-gray-600 hover:text-gray-900"
+                        className="ml-auto text-sm text-white/70 hover:text-white"
                       >
                         Değiştir
                       </button>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="url">URL</Label>
+                      <Label htmlFor="url" className="text-white">URL</Label>
                       <Input
                         id="url"
                         type="url"
@@ -249,7 +250,7 @@ export default function Dashboard() {
                       />
                     </div>
                     <div className="flex gap-2">
-                      <Button type="submit" size="sm" className="flex-1">Ekle</Button>
+                      <Button type="submit" size="sm" className="flex-1 bg-white text-black hover:bg-white/90">Ekle</Button>
                       <Button
                         type="button"
                         variant="outline"
@@ -258,6 +259,7 @@ export default function Dashboard() {
                           setShowAddForm(false)
                           setNewLink({ platformName: '', url: '', icon: '' })
                         }}
+                        className="border-white/20 text-white hover:bg-white/10"
                       >
                         İptal
                       </Button>
@@ -270,9 +272,9 @@ export default function Dashboard() {
             {/* Links List */}
             {links.length === 0 ? (
               <div className="text-center py-12">
-                <FaLink className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-600 mb-2">Henüz link eklemediniz</p>
-                <p className="text-sm text-gray-500">
+                <FaLink className="w-12 h-12 text-white/30 mx-auto mb-4" />
+                <p className="text-white/70 mb-2">Henüz link eklemediniz</p>
+                <p className="text-sm text-white/50">
                   "Link Ekle" butonuna tıklayarak ilk linkinizi ekleyin
                 </p>
               </div>
@@ -289,21 +291,21 @@ export default function Dashboard() {
                       onDragOver={handleDragOver}
                       onDrop={(e) => handleDrop(e, link)}
                       className={`flex items-center gap-3 p-4 border rounded-lg transition-all cursor-move ${
-                        link.isActive ? 'bg-white hover:shadow-md' : 'bg-gray-50 opacity-60'
+                        link.isActive ? 'bg-white/5 border-white/20 hover:bg-white/10' : 'bg-white/5 border-white/10 opacity-60'
                       } ${draggedItem?.id === link.id ? 'opacity-50' : ''}`}
                     >
-                      <FaGripVertical className="w-4 h-4 text-gray-400" />
+                      <FaGripVertical className="w-4 h-4 text-white/40" />
                       <IconComponent className="w-5 h-5 flex-shrink-0" style={{ color: platformInfo.color }} />
                       
                       <div className="flex-1 min-w-0">
-                        <p className="font-medium text-gray-900 truncate">
+                        <p className="font-medium text-white truncate">
                           {link.platformName}
                         </p>
                         <a
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-gray-500 hover:text-gray-700 truncate flex items-center gap-1"
+                          className="text-sm text-white/60 hover:text-white/80 truncate flex items-center gap-1"
                           onClick={(e) => e.stopPropagation()}
                         >
                           {link.url}
@@ -316,6 +318,7 @@ export default function Dashboard() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleToggleLink(link.id)}
+                          className="border-white/20 text-white hover:bg-white/10"
                         >
                           {link.isActive ? 'Gizle' : 'Göster'}
                         </Button>
@@ -323,7 +326,7 @@ export default function Dashboard() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleDeleteLink(link.id)}
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                          className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
                         >
                           <FaTrash className="w-4 h-4" />
                         </Button>
