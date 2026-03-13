@@ -8,6 +8,7 @@ import { getCurrentUser, logoutUser, getUserLinks, addLink, deleteLink, toggleLi
 import { PLATFORMS, getPlatformInfo, getPlatformIcon } from '@/utils/platforms'
 import type { UserWithoutPassword, Link as LinkType, Platform } from '@/types'
 import { FaLink, FaPlus, FaTrash, FaGripVertical, FaEye, FaSignOutAlt, FaExternalLinkAlt, FaCog } from 'react-icons/fa'
+import AnimatedShaderBackground from '@/components/ui/animated-shader-background'
 
 interface NewLink {
   platformName: string;
@@ -107,7 +108,8 @@ export default function Dashboard() {
   if (!user) return null
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen relative">
+      <AnimatedShaderBackground />
       {/* Header */}
       <header className="bg-black/50 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between max-w-4xl">
@@ -137,7 +139,7 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-6 py-8 max-w-4xl">
+      <main className="container mx-auto px-6 py-8 max-w-4xl relative z-10">
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">

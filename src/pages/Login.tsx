@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { FaLink, FaExclamationCircle } from 'react-icons/fa'
 import { loginUser } from '@/utils/storage'
+import AnimatedShaderBackground from '@/components/ui/animated-shader-background'
 
 interface FormData {
   usernameOrEmail: string;
@@ -55,8 +56,9 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-8">
+    <div className="min-h-screen relative flex items-center justify-center p-4">
+      <AnimatedShaderBackground />
+      <div className="w-full max-w-md space-y-8 relative z-10">
         {/* Logo */}
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 text-xl font-semibold hover:opacity-80 transition-opacity">

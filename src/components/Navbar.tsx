@@ -1,8 +1,17 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { FaLink } from 'react-icons/fa'
+import { FaLink, FaSignOutAlt, FaUser } from 'react-icons/fa'
+import { getCurrentUser, logoutUser } from '@/utils/storage'
 
 export default function Navbar() {
+  const navigate = useNavigate()
+  const currentUser = getCurrentUser()
+
+  const handleLogout = () => {
+    logoutUser()
+    navigate('/')
+  }
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent backdrop-blur-xl border-b border-white/10" />
@@ -18,23 +27,51 @@ export default function Navbar() {
         </Link>
         
         <nav className="flex items-center gap-4">
-          <Link to="/login">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="text-white/90 hover:text-white hover:bg-white/10 font-medium transition-all"
-            >
-              Giriş Yap
-            </Button>
-          </Link>
-          <Link to="/register">
-            <Button 
-              size="sm" 
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all"
-            >
-              Ücretsiz Başla
-            </Button>
-          </Link>
+          {currentUser ? (
+            // Giriş yapmış kullanıcı için
+            <>
+              <Link to="/dashboard">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-white/90 hover:text-white hover:bg-white/10 font-medium transition-all gap-2"
+                >
+                  <FaUser className="w-4 h-4" />
+                  Dashboard
+                </Button>
+              </Link>
+              <Button 
+                variant="ghost"
+                size="sm" 
+                onClick={handleLogout}
+                className="text-white/90 hover:text-white hover:bg-white/10 font-medium transition-all gap-2"
+              >
+                <FaSignOutAlt className="w-4 h-4" />
+                Çıkış Yap
+              </Button>
+            </>
+          ) : (
+            // Giriş yapmamış kullanıcı için
+            <>
+              <Link to="/login">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-white/90 hover:text-white hover:bg-white/10 font-medium transition-all"
+                >
+                  Giriş Yap
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button 
+                  size="sm" 
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all"
+                >
+                  Ücretsiz Başla
+                </Button>
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     </header>

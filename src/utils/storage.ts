@@ -156,8 +156,16 @@ const createProfile = (userId: string, username: string): Profile => {
     userId,
     bio: '',
     avatar: '',
-    theme: 'light',
-    customUrl: username
+    theme: 'dark',
+    customUrl: username,
+    layout: 'minimal',
+    backgroundType: 'animated',
+    backgroundColor: '#030014',
+    backgroundImage: '',
+    buttonStyle: 'fill',
+    buttonColor: '#6366f1',
+    cornerRadius: 'medium',
+    fontStyle: 'sans'
   };
   
   profiles.push(newProfile);
@@ -312,8 +320,16 @@ export const createDemoData = (): void => {
     userId: demoUser.id,
     bio: 'Merhaba! Ben demo kullanıcısıyım 👋',
     avatar: '',
-    theme: 'light',
-    customUrl: 'demo'
+    theme: 'dark',
+    customUrl: 'demo',
+    layout: 'minimal',
+    backgroundType: 'animated',
+    backgroundColor: '#030014',
+    backgroundImage: '',
+    buttonStyle: 'fill',
+    buttonColor: '#6366f1',
+    cornerRadius: 'medium',
+    fontStyle: 'sans'
   };
   
   saveToStorage(STORAGE_KEYS.PROFILES, [demoProfile]);

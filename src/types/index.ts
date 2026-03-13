@@ -32,8 +32,16 @@ export interface Profile {
   userId: string;
   bio: string;
   avatar: string;
-  theme: 'light' | 'dark';
+  theme: 'light' | 'dark' | 'purple';
   customUrl: string;
+  layout?: 'classic' | 'minimal' | 'card';
+  backgroundType?: 'solid' | 'gradient' | 'image' | 'animated';
+  backgroundColor?: string;
+  backgroundImage?: string;
+  buttonStyle?: 'fill' | 'outline' | 'shadow';
+  buttonColor?: string;
+  cornerRadius?: 'none' | 'small' | 'medium' | 'full';
+  fontStyle?: 'sans' | 'serif' | 'mono';
 }
 
 // Platform Types
