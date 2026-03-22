@@ -1,13 +1,14 @@
-import { useState, useEffect, DragEvent } from 'react'
+import { useState, useEffect, DragEvent, useRef } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { getCurrentUser, logoutUser, getUserLinks, addLink, deleteLink, toggleLinkStatus, reorderLinks } from '@/utils/storage'
+import { getCurrentUser, logoutUser, getUserLinks, addLink, deleteLink, toggleLinkStatus, reorderLinks, getProfile } from '@/utils/storage'
 import { PLATFORMS, getPlatformInfo, getPlatformIcon } from '@/utils/platforms'
-import type { UserWithoutPassword, Link as LinkType, Platform } from '@/types'
-import { FaLink, FaPlus, FaTrash, FaGripVertical, FaEye, FaSignOutAlt, FaExternalLinkAlt, FaCog } from 'react-icons/fa'
+import { exportData, importData, exportUserMedia } from '@/utils/exportImport'
+import type { UserWithoutPassword, Link as LinkType, Platform, Profile } from '@/types'
+import { FaLink, FaPlus, FaTrash, FaGripVertical, FaEye, FaSignOutAlt, FaExternalLinkAlt, FaCog, FaUser, FaDownload, FaUpload, FaFileDownload } from 'react-icons/fa'
 import AnimatedShaderBackground from '@/components/ui/animated-shader-background'
 
 interface NewLink {
@@ -19,34 +20,45 @@ interface NewLink {
 export default function Dashboard() {
   const navigate = useNavigate()
   const [user, setUser] = useState<UserWithoutPassword | null>(null)
+  const [profile, setProfile] = useState<Profile | null>(null)
   const [links, setLinks] = useState<LinkType[]>([])
   const [showAddForm, setShowAddForm] = useState<boolean>(false)
   const [newLink, setNewLink] = useState<NewLink>({ platformName: '', url: '', icon: '' })
   const [draggedItem, setDraggedItem] = useState<LinkType | null>(null)
+  const importFileRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const currentUser = getCurrentUser()
-    if (!currentUser) {
-      navigate('/login')
-      return
+    const loadData = async () => {
+      const currentUser = await getCurrentUser()
+      if (!currentUser) {
+        navigate('/login')
+        return
+      }
+      setUser(currentUser)
+      await loadLinks(currentUser.id)
+      await loadProfile(currentUser.id)
     }
-    setUser(currentUser)
-    loadLinks(currentUser.id)
+    loadData()
   }, [navigate])
 
-  const loadLinks = (userId: string) => {
-    const userLinks = getUserLinks(userId)
+  const loadLinks = async (userId: string) => {
+    const userLinks = await getUserLinks(userId)
     setLinks(userLinks)
   }
 
-  const handleAddLink = (e: React.FormEvent<HTMLFormElement>) => {
+  const loadProfile = async (userId: string) => {
+    const userProfile = await getProfile(userId)
+    setProfile(userProfile)
+  }
+
+  const handleAddLink = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!newLink.platformName || !newLink.url || !user) return
 
     const platformInfo = getPlatformInfo(newLink.platformName)
-    const result = addLink(user.id, newLink.platformName, newLink.url, platformInfo.icon)
+    const result = await addLink(user.id, newLink.platformName, newLink.url, platformInfo.icon)
     if (result.success) {
-      loadLinks(user.id)
+      await loadLinks(user.id)
       setNewLink({ platformName: '', url: '', icon: '' })
       setShowAddForm(false)
     }
@@ -70,7 +82,7 @@ export default function Dashboard() {
     e.dataTransfer.dropEffect = 'move'
   }
 
-  const handleDrop = (e: DragEvent<HTMLDivElement>, targetLink: LinkType) => {
+  const handleDrop = async (e: DragEvent<HTMLDivElement>, targetLink: LinkType) => {
     e.preventDefault()
     if (!draggedItem || draggedItem.id === targetLink.id || !user) return
 
@@ -82,27 +94,62 @@ export default function Dashboard() {
     newLinks.splice(targetIndex, 0, draggedItem)
 
     setLinks(newLinks)
-    reorderLinks(user.id, newLinks.map(l => l.id))
+    await reorderLinks(user.id, newLinks.map(l => l.id))
     setDraggedItem(null)
   }
 
-  const handleDeleteLink = (linkId: string) => {
+  const handleDeleteLink = async (linkId: string) => {
     if (!user) return
     if (confirm('Bu linki silmek istediğinize emin misiniz?')) {
-      deleteLink(linkId)
-      loadLinks(user.id)
+      await deleteLink(linkId)
+      await loadLinks(user.id)
     }
   }
 
-  const handleToggleLink = (linkId: string) => {
+  const handleToggleLink = async (linkId: string) => {
     if (!user) return
-    toggleLinkStatus(linkId)
-    loadLinks(user.id)
+    await toggleLinkStatus(linkId)
+    await loadLinks(user.id)
   }
 
-  const handleLogout = () => {
-    logoutUser()
+  const handleLogout = async () => {
+    await logoutUser()
     navigate('/')
+  }
+
+  const handleExportData = () => {
+    try {
+      exportData()
+      alert('Verileriniz başarıyla indirildi!')
+    } catch (error) {
+      alert('Export hatası: ' + error)
+    }
+  }
+
+  const handleImportData = () => {
+    importFileRef.current?.click()
+  }
+
+  const handleFileImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    try {
+      await importData(file)
+      alert('Verileriniz başarıyla yüklendi! Sayfa yenileniyor...')
+      window.location.reload()
+    } catch (error) {
+      alert('Import hatası: ' + error)
+    }
+  }
+
+  const handleExportMedia = () => {
+    if (!user) return
+    try {
+      exportUserMedia(user.id)
+    } catch (error) {
+      alert('Medya export hatası: ' + error)
+    }
   }
 
   if (!user) return null
@@ -140,14 +187,30 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <main className="container mx-auto px-6 py-8 max-w-4xl relative z-10">
-        {/* Welcome Section */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
-            Hoş geldin, {user.username}!
-          </h1>
-          <p className="text-white/70">
-            Linklerini yönet ve profilini özelleştir
-          </p>
+        {/* Welcome Section with Avatar */}
+        <div className="mb-8 flex items-center gap-6">
+          {/* Avatar */}
+          <div className="w-20 h-20 flex-shrink-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full flex items-center justify-center overflow-hidden border-4 border-white/20 backdrop-blur-sm">
+            {profile?.avatar ? (
+              <img 
+                src={profile.avatar} 
+                alt={user?.username} 
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <FaUser className="w-8 h-8 text-white/60" />
+            )}
+          </div>
+          
+          {/* Welcome Text */}
+          <div className="flex-1">
+            <h1 className="text-3xl font-bold text-white mb-2">
+              Hoş geldin, {user?.username}!
+            </h1>
+            <p className="text-white/70">
+              Linklerini yönet ve profilini özelleştir
+            </p>
+          </div>
         </div>
 
         {/* Profile URL */}
@@ -172,6 +235,54 @@ export default function Dashboard() {
                 Kopyala
               </Button>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Data Management */}
+        <Card className="mb-6 bg-white/5 border-white/10">
+          <CardHeader>
+            <CardTitle className="text-white">Veri Yönetimi</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleExportData}
+                className="gap-2 border-white/20 text-white hover:bg-white/10"
+              >
+                <FaDownload className="w-4 h-4" />
+                Verileri İndir (JSON)
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleImportData}
+                className="gap-2 border-white/20 text-white hover:bg-white/10"
+              >
+                <FaUpload className="w-4 h-4" />
+                Verileri Yükle
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleExportMedia}
+                className="gap-2 border-white/20 text-white hover:bg-white/10"
+              >
+                <FaFileDownload className="w-4 h-4" />
+                Medyaları İndir
+              </Button>
+            </div>
+            <p className="text-xs text-white/50 mt-3">
+              Verilerinizi JSON dosyası olarak yedekleyin veya medya dosyalarınızı (avatar, arka plan, müzik) indirin.
+            </p>
+            <input
+              ref={importFileRef}
+              type="file"
+              accept=".json"
+              onChange={handleFileImport}
+              className="hidden"
+            />
           </CardContent>
         </Card>
 

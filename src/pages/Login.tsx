@@ -30,7 +30,7 @@ export default function Login() {
     setError('')
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError('')
     setLoading(true)
@@ -43,7 +43,7 @@ export default function Login() {
     }
 
     // Giriş işlemi
-    const result = loginUser(formData.usernameOrEmail, formData.password)
+    const result = await loginUser(formData.usernameOrEmail, formData.password)
     
     if (result.success) {
       setTimeout(() => {

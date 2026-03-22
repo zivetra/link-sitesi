@@ -34,12 +34,15 @@ export interface Profile {
   avatar: string;
   theme: 'light' | 'dark' | 'purple';
   customUrl: string;
-  layout?: 'classic' | 'minimal' | 'card';
-  backgroundType?: 'solid' | 'gradient' | 'image' | 'animated';
+  layout?: 'classic' | 'minimal' | 'card' | 'elite';
+  backgroundType?: 'solid' | 'gradient' | 'image' | 'animated' | 'gif';
   backgroundColor?: string;
   backgroundImage?: string;
-  buttonStyle?: 'fill' | 'outline' | 'shadow';
+  backgroundGif?: string;
+  backgroundMusic?: string;
+  buttonStyle?: 'fill' | 'outline' | 'shadow' | 'gradient' | 'glass' | 'neon';
   buttonColor?: string;
+  buttonTextColor?: string;
   cornerRadius?: 'none' | 'small' | 'medium' | 'full';
   fontStyle?: 'sans' | 'serif' | 'mono';
 }

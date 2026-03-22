@@ -42,13 +42,23 @@ LinkHub, kullanıcıların sosyal medya hesaplarını, web sitelerini ve önemli
 - ✅ Link aktif/pasif yapma
 - ✅ Renkli platform ikonları
 
-### Profil
+### Profil Özellikleri
 - ✅ Özel kullanıcı URL'i (linkhub.com/username)
 - ✅ Profil görüntüleme sayfası
 - ✅ **Profil düzenleme sayfası**
-- ✅ **Bio ekleme/güncelleme**
-- ✅ **Tema seçimi (açık/koyu mod)**
-- ✅ Avatar gösterimi
+- ✅ **Bio ekleme/güncelleme (200 karakter)**
+- ✅ **Avatar yükleme (2MB limit, JPG/PNG/GIF)**
+- ✅ **Tema seçimi (Light/Dark/Purple)**
+- ✅ **Düzen seçimi (Klasik/Minimal/Kart)**
+- ✅ **Arka plan özelleştirme:**
+  - Düz renk
+  - Gradyan
+  - Görsel yükleme (8MB limit)
+  - Animasyonlu shader
+- ✅ **Buton stilleri (Fill/Outline/Shadow)**
+- ✅ **Buton renk seçici**
+- ✅ **Köşe yuvarlaklığı (Yok/Küçük/Orta/Tam)**
+- ✅ **Yazı tipi seçimi (Sans/Serif/Mono)**
 - ✅ Minimal ve temiz tasarım
 - ✅ Responsive tasarım
 
@@ -118,9 +128,20 @@ http://localhost:5001
 
 ### Profil Düzenleme
 1. Dashboard'da "Profil Düzenle" butonuna tıklayın
-2. Bio ekleyin/güncelleyin (200 karakter)
-3. Tema seçin (açık/koyu)
-4. "Değişiklikleri Kaydet" butonuna tıklayın
+2. **Avatar yükleyin** (isteğe bağlı, max 2MB)
+3. **Bio ekleyin/güncelleyin** (200 karakter)
+4. **Tema seçin** (Light/Dark/Purple)
+5. **Düzen seçin** (Klasik/Minimal/Kart)
+6. **Arka plan özelleştirin:**
+   - Düz renk: Renk seçici ile özel renk
+   - Gradyan: Hazır gradyan efekti
+   - Görsel: Kendi görselinizi yükleyin (max 8MB)
+   - Animasyonlu: Shader animasyonu
+7. **Buton stilini seçin** (Fill/Outline/Shadow)
+8. **Buton rengini özelleştirin** (Renk seçici)
+9. **Köşe yuvarlaklığını ayarlayın** (Yok/Küçük/Orta/Tam)
+10. **Yazı tipini seçin** (Sans Serif/Serif/Mono)
+11. "Değişiklikleri Kaydet" butonuna tıklayın
 
 ### Profil Görüntüleme
 - Dashboard'da "Görüntüle" butonuna tıklayın
@@ -230,17 +251,26 @@ Projeyi test etmek için demo hesap kullanabilirsiniz:
 ### Tamamlanan Özellikler ✅
 - ✅ Drag & drop ile link sıralama
 - ✅ Sosyal medya platform ikonları (13 platform)
-- ✅ Tema sistemi (açık/koyu mod)
-- ✅ Profil düzenleme
-- ✅ Bio ekleme
+- ✅ Gelişmiş tema sistemi (Light/Dark/Purple)
+- ✅ Kapsamlı profil düzenleme
+- ✅ Bio ekleme (200 karakter limit)
+- ✅ Avatar yükleme (2MB limit)
+- ✅ Arka plan özelleştirme (4 farklı tip)
+- ✅ Buton stil özelleştirme (3 farklı stil)
+- ✅ Renk seçici (buton ve arka plan)
+- ✅ Köşe yuvarlaklığı ayarı (4 seviye)
+- ✅ Yazı tipi seçimi (3 farklı font)
+- ✅ Düzen seçimi (3 farklı layout)
+- ✅ Görsel yükleme (avatar ve arka plan)
+- ✅ Animasyonlu shader arka plan
 
 ### Planlanan Özellikler (Opsiyonel)
 - Link tıklama istatistikleri
 - QR kod oluşturma
 - Profil paylaşma butonu
-- Avatar yükleme (base64)
 - Link önizleme
-- Animasyonlar
+- Daha fazla animasyon efekti
+- Özel CSS ekleme
 
 ### Potansiyel Geliştirmeler
 - Backend entegrasyonu (Node.js + MongoDB)

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "profile_1774145600731_aqdpnr2dv",
+    "userId": "user_1774145600676_y5iulvhzf",
+    "bio": "asdasdsa",
+    "avatar": "/media/avatars/user_1774145600676_y5iulvhzf_avatar_1774145660492.jpg",
+    "theme": "purple",
+    "customUrl": "ruwis",
+    "layout": "elite",
+    "backgroundType": "gif",
+    "backgroundColor": "#030014",
+    "backgroundImage": "",
+    "backgroundGif": "/media/backgrounds/user_1774145600676_y5iulvhzf_gif_1774145761118.gif",
+    "backgroundMusic": "/media/music/user_1774145600676_y5iulvhzf_music_1774145802159.mp3",
+    "buttonStyle": "outline",
+    "buttonColor": "#6366f1",
+    "buttonTextColor": "auto",
+    "cornerRadius": "medium",
+    "fontStyle": "sans"
+  },
+  {
+    "id": "profile_1774146133979_5pcyhxq68",
+    "userId": "user_1774146133971_i2925z11o",
+    "bio": "adsdsadadsd",
+    "avatar": "/media/avatars/user_1774146133971_i2925z11o_avatar_1774146151113.jpg",
+    "theme": "dark",
+    "customUrl": "eray",
+    "layout": "elite",
+    "backgroundType": "gif",
+    "backgroundColor": "#030014",
+    "backgroundImage": "",
+    "backgroundGif": "/media/backgrounds/user_1774146133971_i2925z11o_gif_1774207612381.gif",
+    "backgroundMusic": "/media/music/user_1774146133971_i2925z11o_music_1774207612391.mp3",
+    "buttonStyle": "fill",
+    "buttonColor": "#6366f1",
+    "buttonTextColor": "auto",
+    "cornerRadius": "medium",
+    "fontStyle": "serif",
+    "musicName": "REMOLG"
+  }
+]

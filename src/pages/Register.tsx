@@ -34,7 +34,7 @@ export default function Register() {
     setError('')
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError('')
     setLoading(true)
@@ -73,7 +73,7 @@ export default function Register() {
     }
 
     // Kayıt işlemi
-    const result = registerUser(formData.username, formData.email, formData.password)
+    const result = await registerUser(formData.username, formData.email, formData.password)
     
     if (result.success) {
       // Otomatik giriş yap
