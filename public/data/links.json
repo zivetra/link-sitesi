@@ -7,6 +7,95 @@
     "icon": "instagram",
     "order": 1,
     "isActive": true,
-    "createdAt": "2026-03-22T02:13:42.001Z"
+    "createdAt": "2026-03-22T02:13:42.001Z",
+    "clicks": 0
+  },
+  {
+    "id": "link_1774440561941_c1837cijd",
+    "userId": "user_1774146133971_i2925z11o",
+    "platformName": "Instagram",
+    "url": "https://www.instagram.com/",
+    "icon": "instagram",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-03-25T12:09:21.941Z",
+    "clicks": 0
+  },
+  {
+    "id": "link_1774440569378_pde3bjvzg",
+    "userId": "user_1774146133971_i2925z11o",
+    "platformName": "Twitter",
+    "url": "https://x.com/?logout=1774440566608",
+    "icon": "twitter",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-03-25T12:09:29.378Z",
+    "clicks": 0
+  },
+  {
+    "id": "link_1774440579333_mo3ik8asc",
+    "userId": "user_1774146133971_i2925z11o",
+    "platformName": "GitHub",
+    "url": "https://github.com/zivetra",
+    "icon": "github",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-03-25T12:09:39.333Z",
+    "clicks": 0
+  },
+  {
+    "id": "link_1774440588950_gwkj968v8",
+    "userId": "user_1774146133971_i2925z11o",
+    "platformName": "LinkedIn",
+    "url": "https://tr.linkedin.com/?mcid=7011503728440569856&src=go-pa&trk=sem-ga_campid.19331681909_asid.168715020864_crid.698313460548_kw.linkedin_d.c_tid.kwd-148086543_n.g_mt.e_geo.9207870&cid=&gclsrc=aw.ds&gad_source=1&gad_campaignid=19331681909&gbraid=0AAAAAojDCNTVu8SZjCDeX26p2bRakyLLt&gclid=Cj0KCQjwj47OBhCmARIsAF5wUEHe7xjCNJPg0MXsctIFvgul-u7VNRPpOZ0YD__G63U848LwbS6DJnsaAhhcEALw_wcB",
+    "icon": "linkedin",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-03-25T12:09:48.950Z",
+    "clicks": 0
+  },
+  {
+    "id": "link_1774440598195_xlklgjmvy",
+    "userId": "user_1774146133971_i2925z11o",
+    "platformName": "YouTube",
+    "url": "https://www.youtube.com/",
+    "icon": "youtube",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-03-25T12:09:58.195Z",
+    "clicks": 0
+  },
+  {
+    "id": "link_1774440612191_qw5efv69m",
+    "userId": "user_1774146133971_i2925z11o",
+    "platformName": "TikTok",
+    "url": "https://www.tiktok.com/tr-TR/",
+    "icon": "tiktok",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-03-25T12:10:12.191Z",
+    "clicks": 0
+  },
+  {
+    "id": "link_1774440622248_zumupylc6",
+    "userId": "user_1774146133971_i2925z11o",
+    "platformName": "Facebook",
+    "url": "https://www.facebook.com/",
+    "icon": "facebook",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-03-25T12:10:22.248Z",
+    "clicks": 0
+  },
+  {
+    "id": "link_1774440634560_z0je0syiz",
+    "userId": "user_1774146133971_i2925z11o",
+    "platformName": "Twitch",
+    "url": "https://www.twitch.tv/",
+    "icon": "twitch",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-03-25T12:10:34.560Z",
+    "clicks": 0
   }
 ]

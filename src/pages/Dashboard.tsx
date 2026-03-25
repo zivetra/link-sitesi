@@ -8,8 +8,9 @@ import { getCurrentUser, logoutUser, getUserLinks, addLink, deleteLink, toggleLi
 import { PLATFORMS, getPlatformInfo, getPlatformIcon } from '@/utils/platforms'
 import { exportData, importData, exportUserMedia } from '@/utils/exportImport'
 import type { UserWithoutPassword, Link as LinkType, Platform, Profile } from '@/types'
-import { FaLink, FaPlus, FaTrash, FaGripVertical, FaEye, FaSignOutAlt, FaExternalLinkAlt, FaCog, FaUser, FaDownload, FaUpload, FaFileDownload } from 'react-icons/fa'
+import { FaLink, FaPlus, FaTrash, FaGripVertical, FaEye, FaSignOutAlt, FaExternalLinkAlt, FaCog, FaUser, FaDownload, FaUpload, FaFileDownload, FaQrcode, FaShare, FaTimes } from 'react-icons/fa'
 import AnimatedShaderBackground from '@/components/ui/animated-shader-background'
+import { QRCodeSVG } from 'qrcode.react'
 
 interface NewLink {
   platformName: string;
@@ -25,6 +26,7 @@ export default function Dashboard() {
   const [showAddForm, setShowAddForm] = useState<boolean>(false)
   const [newLink, setNewLink] = useState<NewLink>({ platformName: '', url: '', icon: '' })
   const [draggedItem, setDraggedItem] = useState<LinkType | null>(null)
+  const [showQRCode, setShowQRCode] = useState<boolean>(false)
   const importFileRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -152,6 +154,61 @@ export default function Dashboard() {
     }
   }
 
+  const handleShare = async () => {
+    if (!user) return
+    const profileUrl = `${window.location.origin}/${user.username}`
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `@${user.username} - LinkHub`,
+          text: `${profile?.bio || `@${user.username}'in LinkHub profili`}`,
+          url: profileUrl
+        })
+      } catch (error) {
+        if ((error as Error).name !== 'AbortError') {
+          copyToClipboard(profileUrl)
+        }
+      }
+    } else {
+      copyToClipboard(profileUrl)
+    }
+  }
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        alert('Profil linki kopyalandı!')
+      })
+      .catch(() => {
+        alert('Kopyalama başarısız oldu')
+      })
+  }
+
+  const downloadQRCode = () => {
+    const svg = document.getElementById('qr-code-svg')
+    if (!svg) return
+
+    const svgData = new XMLSerializer().serializeToString(svg)
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const img = new Image()
+
+    img.onload = () => {
+      canvas.width = img.width
+      canvas.height = img.height
+      ctx?.drawImage(img, 0, 0)
+      const pngFile = canvas.toDataURL('image/png')
+
+      const downloadLink = document.createElement('a')
+      downloadLink.download = `${user?.username}-qrcode.png`
+      downloadLink.href = pngFile
+      downloadLink.click()
+    }
+
+    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)))
+  }
+
   if (!user) return null
 
   return (
@@ -216,7 +273,7 @@ export default function Dashboard() {
         {/* Profile URL */}
         <Card className="mb-6 bg-white/5 border-white/10">
           <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-sm text-white/70 mb-1">Profil URL'in:</p>
                 <p className="text-lg font-mono text-white">
@@ -233,6 +290,28 @@ export default function Dashboard() {
                 }}
               >
                 Kopyala
+              </Button>
+            </div>
+            
+            {/* Share & QR Code Buttons */}
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleShare}
+                className="flex-1 gap-2 border-white/20 text-white hover:bg-white/10"
+              >
+                <FaShare className="w-4 h-4" />
+                Paylaş
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowQRCode(true)}
+                className="flex-1 gap-2 border-white/20 text-white hover:bg-white/10"
+              >
+                <FaQrcode className="w-4 h-4" />
+                QR Kod
               </Button>
             </div>
           </CardContent>
@@ -424,6 +503,9 @@ export default function Dashboard() {
                           {link.url}
                           <FaExternalLinkAlt className="w-3 h-3" />
                         </a>
+                        <p className="text-xs text-white/50 mt-1">
+                          {link.clicks || 0} tıklama
+                        </p>
                       </div>
 
                       <div className="flex items-center gap-2">
@@ -452,6 +534,50 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </main>
+
+      {/* QR Code Modal */}
+      {showQRCode && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={() => setShowQRCode(false)}>
+          <div className="bg-white rounded-2xl p-8 max-w-sm w-full relative" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setShowQRCode(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <FaTimes className="w-6 h-6" />
+            </button>
+            
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                QR Kod
+              </h3>
+              <p className="text-gray-600 mb-6">
+                @{user.username}
+              </p>
+              
+              <div className="bg-white p-6 rounded-xl inline-block mb-6">
+                <QRCodeSVG
+                  id="qr-code-svg"
+                  value={`${window.location.origin}/${user.username}`}
+                  size={200}
+                  level="H"
+                  includeMargin={true}
+                />
+              </div>
+              
+              <p className="text-sm text-gray-500 mb-4">
+                Bu QR kodu tarayarak profiline ulaşabilirler
+              </p>
+              
+              <Button
+                onClick={downloadQRCode}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+              >
+                QR Kodu İndir
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

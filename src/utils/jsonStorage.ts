@@ -422,7 +422,8 @@ export const addLink = async (
     icon,
     order: userLinks.length + 1,
     isActive: true,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    clicks: 0
   };
   
   links.push(newLink);
@@ -509,6 +510,26 @@ export const toggleLinkStatus = async (linkId: string): Promise<LinkResponse> =>
   return { success: true, message: 'Link durumu güncellendi', link: links[index] };
 };
 
+// Link tıklama sayısını artır
+export const incrementLinkClicks = async (linkId: string): Promise<LinkResponse> => {
+  const links = await getAllLinks();
+  const index = links.findIndex(l => l.id === linkId);
+  
+  if (index === -1) {
+    return { success: false, message: 'Link bulunamadı' };
+  }
+  
+  // Eğer clicks yoksa 0'dan başlat
+  links[index].clicks = (links[index].clicks || 0) + 1;
+  const saved = await writeJSON(DATA_FILES.LINKS, links);
+  
+  if (!saved) {
+    return { success: false, message: 'Tıklama sayısı güncellenemedi' };
+  }
+  
+  return { success: true, message: 'Tıklama kaydedildi', link: links[index] };
+};
+
 // ============================================================================
 // DEMO VERİ
 // ============================================================================
@@ -555,7 +576,8 @@ export const createDemoData = async (): Promise<void> => {
       icon: 'instagram',
       order: 1,
       isActive: true,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      clicks: 0
     },
     {
       id: 'link_demo_2',
@@ -565,7 +587,8 @@ export const createDemoData = async (): Promise<void> => {
       icon: 'twitter',
       order: 2,
       isActive: true,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      clicks: 0
     },
     {
       id: 'link_demo_3',
@@ -575,7 +598,8 @@ export const createDemoData = async (): Promise<void> => {
       icon: 'github',
       order: 3,
       isActive: true,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      clicks: 0
     }
   ];
   

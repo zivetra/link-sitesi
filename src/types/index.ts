@@ -24,6 +24,7 @@ export interface Link {
   order: number;
   isActive: boolean;
   createdAt: string;
+  clicks?: number; // Tıklama sayısı
 }
 
 // Profile Types

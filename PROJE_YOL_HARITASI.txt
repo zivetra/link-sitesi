@@ -103,18 +103,18 @@ AŞAMA 9: EK ÖZELLİKLER (MVP SONRASI)
 ☑ 9.1 - Profil fotoğrafı yükleme (Avatar gösterimi)
 ☑ 9.2 - Özel URL (custom slug) belirleme
 ☑ 9.3 - Tema özelleştirme
-☐ 9.4 - Link tıklama istatistikleri (opsiyonel)
-☐ 9.5 - QR kod oluşturma (opsiyonel)
-☐ 9.6 - Profil paylaşma butonu (opsiyonel)
+☑ 9.4 - Link tıklama istatistikleri (opsiyonel)
+☑ 9.5 - QR kod oluşturma (opsiyonel)
+☑ 9.6 - Profil paylaşma butonu (opsiyonel)
 
 ================================================================================
 AŞAMA 10: TEST VE HATA AYIKLAMA
 ================================================================================
-☐ 10.1 - Kayıt/giriş testleri
-☐ 10.2 - Link CRUD işlemleri testleri
-☐ 10.3 - Responsive tasarım testleri
-☐ 10.4 - Tarayıcı uyumluluğu testleri
-☐ 10.5 - Güvenlik testleri (SQL injection, XSS)
+☑ 10.1 - Kayıt/giriş testleri
+☑ 10.2 - Link CRUD işlemleri testleri
+☑ 10.3 - Responsive tasarım testleri
+☑ 10.4 - Tarayıcı uyumluluğu testleri
+☑ 10.5 - Güvenlik testleri (SQL injection, XSS)
 
 ================================================================================
 AŞAMA 11: DOKÜMANTASYON (FİNAL İÇİN ÖNEMLİ!)

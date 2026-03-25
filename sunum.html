@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkHub - Proje Ön Sunumu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease;
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+            color: #667eea;
+            margin: 20px 0 15px 0;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .content {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            font-size: 1.3em;
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .box h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        
+        .box p, .box ul {
+            font-size: 1.1em;
+            color: #555;
+        }
+        
+        .screenshot {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 20px 0;
+        }
+        
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .platform-icon {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .slide-number {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            display: block;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline-item {
+            margin: 25px 0;
+            padding-left: 30px;
+            border-left: 3px solid #667eea;
+            position: relative;
+        }
+        
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+        
+        .timeline-item h4 {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item p {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slayt 1: Kapak -->
+        <div class="slide active">
+            <div class="content">
+                <h1>🔗 LinkHub</h1>
+                <p class="subtitle">"Bir link, sınırsız bağlantı"</p>
+                <p class="subtitle" style="font-size: 1.2em; margin-top: 100px;">
+                    Sosyal Medya Link Toplama Platformu
+                </p>
+            </div>
+            <div class="footer">
+                <p>PP214 / BTE208 - AI-Driven Product Design & Development</p>
+                <p>Plato Meslek Yüksekokulu - 2026 Bahar</p>
+            </div>
+        </div>
+
+        <!-- Slayt 2: Uygulama Fikri -->
+        <div class="slide">
+            <div class="content">
+                <h2>🎯 Uygulama Fikri</h2>
+                <div class="box" style="margin: 40px 0;">
+                    <h3>LinkHub Nedir?</h3>
+                    <p style="font-size: 1.4em; line-height: 1.8; margin-top: 20px;">
+                        Kullanıcıların tüm sosyal medya hesaplarını, web sitelerini ve önemli linklerini 
+                        <strong style="color: #667eea;">tek bir özelleştirilebilir sayfada</strong> toplamasını sağlayan 
+                        minimal ve kullanıcı dostu bir platform.
+                    </p>
+                </div>
+                <div class="box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h3 style="color: white; text-align: center; font-size: 2em;">
+                        "Bir link, sınırsız bağlantı"
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 3: Hedef Kullanıcı Kitlesi -->
+        <div class="slide">
+            <div class="content">
+                <h2>👥 Hedef Kullanıcı Kitlesi</h2>
+                <div class="grid">
+                    <div class="box">
+                        <h3>Birincil Hedef</h3>
+                        <ul>
+                            <li>İçerik Üreticiler & Influencer'lar</li>
+                            <li>Instagram, TikTok, YouTube içerik üreticileri</li>
+                            <li>Freelancer'lar & Girişimciler</li>
+                            <li>Profesyonel görünüm arayanlar</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>İkincil Hedef</h3>
+                        <ul>
+                            <li>Küçük işletme sahipleri</li>
+                            <li>Sanatçılar ve müzisyenler</li>
+                            <li>Podcast yapımcıları</li>
+                            <li>Dijital pazarlamacılar</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box" style="margin-top: 30px; text-align: center;">
+                    <h3>Demografik: 18-35 yaş arası, sosyal medya aktif kullanıcıları</h3>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 4: Problem Tanımı -->
+        <div class="slide">
+            <div class="content">
+                <h2>🔍 Problem Tanımı</h2>
+                <div class="grid">
+                    <div class="box" style="border-left-color: #e74c3c;">
+                        <h3>❌ Platform Sınırlamaları</h3>
+                        <ul>
+                            <li>Instagram bio'sunda sadece 1 link</li>
+                            <li>Her platform için ayrı link yönetimi</li>
+                        </ul>
+                    </div>
+                    <div class="box" style="border-left-color: #e74c3c;">
+                        <h3>❌ Dağınık Link Yapısı</h3>
+                        <ul>
+                            <li>Farklı platformlarda dağınık linkler</li>
+                            <li>Takipçilerin tüm içeriklere ulaşması zor</li>
+                        </ul>
+                    </div>
+                    <div class="box" style="border-left-color: #e74c3c;">
+                        <h3>❌ Güncelleme Zorluğu</h3>
+                        <ul>
+                            <li>Her platformda ayrı ayrı güncelleme</li>
+                            <li>Zaman kaybı ve tutarsızlık riski</li>
+                        </ul>
+                    </div>
+                    <div class="box" style="border-left-color: #e74c3c;">
+                        <h3>❌ Profesyonel Görünüm Eksikliği</h3>
+                        <ul>
+                            <li>Basit link listeleri estetik değil</li>
+                            <li>Marka kimliğini yansıtamama</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 5: Çözüm -->
+        <div class="slide">
+            <div class="content">
+                <h2>✅ LinkHub Çözümü</h2>
+                <div class="grid">
+                    <div class="box" style="border-left-color: #27ae60; background: #e8f8f5;">
+                        <h3 style="color: #27ae60;">✓ Tek URL</h3>
+                        <p>Tek bir URL ile tüm linklere erişim</p>
+                    </div>
+                    <div class="box" style="border-left-color: #27ae60; background: #e8f8f5;">
+                        <h3 style="color: #27ae60;">✓ Kolay Yönetim</h3>
+                        <p>Kolay güncelleme ve yönetim</p>
+                    </div>
+                    <div class="box" style="border-left-color: #27ae60; background: #e8f8f5;">
+                        <h3 style="color: #27ae60;">✓ Özelleştirme</h3>
+                        <p>Özelleştirilebilir profesyonel tasarım</p>
+                    </div>
+                    <div class="box" style="border-left-color: #27ae60; background: #e8f8f5;">
+                        <h3 style="color: #27ae60;">✓ Sınırsız Link</h3>
+                        <p>Sınırsız link ekleme imkanı</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 6: Temel Özellikler -->
+        <div class="slide">
+            <div class="content">
+                <h2>🚀 Temel Özellikler (MVP)</h2>
+                <div class="grid">
+                    <div class="box">
+                        <h3>Kullanıcı Yönetimi</h3>
+                        <ul style="font-size: 1em;">
+                            <li>Güvenli kayıt ve giriş</li>
+                            <li>Oturum yönetimi</li>
+                            <li>Form validasyonu</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Link Yönetimi</h3>
+                        <ul style="font-size: 1em;">
+                            <li>Sınırsız link ekleme</li>
+                            <li>10 platform desteği</li>
+                            <li>Drag & Drop sıralama</li>
+                            <li>Link aktif/pasif yapma</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box" style="margin-top: 20px;">
+                    <h3>Profil Özellikleri</h3>
+                    <ul style="font-size: 1em;">
+                        <li>Özel kullanıcı URL'i (linkhub.com/username)</li>
+                        <li>Bio ekleme (200 karakter)</li>
+                        <li>Avatar yükleme</li>
+                        <li>Tema seçimi (Light/Dark/Purple)</li>
+                        <li>Arka plan özelleştirme</li>
+                        <li>Responsive tasarım</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 7: Desteklenen Platformlar -->
+        <div class="slide">
+            <div class="content">
+                <h2>📱 10 Farklı Platform Desteği</h2>
+                <div class="platforms">
+                    <div class="platform-icon" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);">
+                        <div style="color: white; font-size: 2em;">📷</div>
+                        <div style="color: white;">Instagram</div>
+                    </div>
+                    <div class="platform-icon" style="background: #1DA1F2;">
+                        <div style="color: white; font-size: 2em;">🐦</div>
+                        <div style="color: white;">Twitter</div>
+                    </div>
+                    <div class="platform-icon" style="background: #333;">
+                        <div style="color: white; font-size: 2em;">💻</div>
+                        <div style="color: white;">GitHub</div>
+                    </div>
+                    <div class="platform-icon" style="background: #0077B5;">
+                        <div style="color: white; font-size: 2em;">💼</div>
+                        <div style="color: white;">LinkedIn</div>
+                    </div>
+                    <div class="platform-icon" style="background: #FF0000;">
+                        <div style="color: white; font-size: 2em;">▶️</div>
+                        <div style="color: white;">YouTube</div>
+                    </div>
+                    <div class="platform-icon" style="background: #000;">
+                        <div style="color: white; font-size: 2em;">🎵</div>
+                        <div style="color: white;">TikTok</div>
+                    </div>
+                    <div class="platform-icon" style="background: #1877F2;">
+                        <div style="color: white; font-size: 2em;">👍</div>
+                        <div style="color: white;">Facebook</div>
+                    </div>
+                    <div class="platform-icon" style="background: #1DB954;">
+                        <div style="color: white; font-size: 2em;">🎧</div>
+                        <div style="color: white;">Spotify</div>
+                    </div>
+                    <div class="platform-icon" style="background: #5865F2;">
+                        <div style="color: white; font-size: 2em;">💬</div>
+                        <div style="color: white;">Discord</div>
+                    </div>
+                    <div class="platform-icon" style="background: #9146FF;">
+                        <div style="color: white; font-size: 2em;">🎮</div>
+                        <div style="color: white;">Twitch</div>
+                    </div>
+                </div>
+                <div class="box" style="margin-top: 30px; text-align: center;">
+                    <p style="font-size: 1.3em;">+ Özel link ekleme özelliği</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 8: Kullanılacak AI Araçları -->
+        <div class="slide">
+            <div class="content">
+                <h2>🤖 Kullanılacak AI Araçları</h2>
+                <div class="grid">
+                    <div class="box">
+                        <h3>Konsept Geliştirme</h3>
+                        <ul style="font-size: 1em;">
+                            <li>ChatGPT / Claude</li>
+                            <li>Problem analizi</li>
+                            <li>User journey mapping</li>
+                            <li>Dokümantasyon</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Tasarım</h3>
+                        <ul style="font-size: 1em;">
+                            <li>shadcn/ui + AI</li>
+                            <li>Tailwind CSS</li>
+                            <li>Minimal UI components</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Kod Geliştirme</h3>
+                        <ul style="font-size: 1em;">
+                            <li>Cursor / GitHub Copilot</li>
+                            <li>ChatGPT</li>
+                            <li>Otomatik kod tamamlama</li>
+                            <li>Debugging</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Görsel İçerik</h3>
+                        <ul style="font-size: 1em;">
+                            <li>Lucide React</li>
+                            <li>Platform ikonları</li>
+                            <li>UI ikonları</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 9: Geliştirme İş Akışı -->
+        <div class="slide">
+            <div class="content">
+                <h2>📋 Planlanan Geliştirme İş Akışı</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Hafta 1-2: Planlama ve Tasarım</h4>
+                        <p>• Konsept geliştirme (AI ile)<br>
+                           • UI/UX tasarımı<br>
+                           • Wireframe oluşturma</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Hafta 3-4: Temel Geliştirme</h4>
+                        <p>• Proje kurulumu (React + Vite + Tailwind)<br>
+                           • Kullanıcı yönetimi<br>
+                           • localStorage yapısı</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Hafta 5-6: Özellik Geliştirme</h4>
+                        <p>• Link yönetimi (CRUD)<br>
+                           • Drag & drop sıralama<br>
+                           • Profil sistemi</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Hafta 7-8: Test ve Dokümantasyon</h4>
+                        <p>• Testler ve optimizasyon<br>
+                           • README ve dokümantasyon<br>
+                           • GitHub yükleme</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 10: Teknoloji Stack -->
+        <div class="slide">
+            <div class="content">
+                <h2>🛠️ Teknoloji Stack</h2>
+                <div class="grid">
+                    <div class="box">
+                        <h3>Frontend</h3>
+                        <ul style="font-size: 1em;">
+                            <li>React 19.2.4</li>
+                            <li>Vite 8.0.0</li>
+                            <li>Tailwind CSS 3.4.17</li>
+                            <li>shadcn/ui</li>
+                            <li>React Router DOM</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Veri Depolama</h3>
+                        <ul style="font-size: 1em;">
+                            <li>localStorage</li>
+                            <li>Tarayıcı yerel depolama</li>
+                            <li>Backend gerektirmez</li>
+                            <li>Hızlı ve hafif</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box" style="margin-top: 20px;">
+                    <h3>Geliştirme Araçları</h3>
+                    <ul style="font-size: 1em;">
+                        <li>ESLint - Code linting</li>
+                        <li>PostCSS - CSS processing</li>
+                        <li>Lucide React - Icons</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 11: Ana Sayfa Ekran Görüntüsü -->
+        <div class="slide">
+            <div class="content">
+                <h2>💻 Ana Sayfa (Landing Page)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;">
+                    <div style="background: #000; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                        <div style="text-align: center; color: white;">
+                            <div style="font-size: 1.5em; margin-bottom: 20px;">🔗 LinkHub</div>
+                            <h3 style="color: white; font-size: 2em; margin: 20px 0;">Dijital Kimliğini<br/>Tek Linkle Yönet</h3>
+                            <p style="color: #999; margin: 20px 0;">Sosyal medya hesaplarını, portfolyonu ve tüm önemli linklerini tek bir sayfada topla. Profesyonel görün, kolayca paylaş.</p>
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 40px; border-radius: 10px; display: inline-block; margin: 20px 0;">Hemen Başla</div>
+                            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 30px; flex-wrap: wrap;">
+                                <div style="background: #E1306C; width: 40px; height: 40px; border-radius: 8px;"></div>
+                                <div style="background: #1DA1F2; width: 40px; height: 40px; border-radius: 8px;"></div>
+                                <div style="background: #333; width: 40px; height: 40px; border-radius: 8px;"></div>
+                                <div style="background: #0077B5; width: 40px; height: 40px; border-radius: 8px;"></div>
+                                <div style="background: #FF0000; width: 40px; height: 40px; border-radius: 8px;"></div>
+                                <div style="background: #000; width: 40px; height: 40px; border-radius: 8px;"></div>
+                                <div style="background: #1DB954; width: 40px; height: 40px; border-radius: 8px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Ana Sayfa Özellikleri:</h3>
+                        <ul style="font-size: 1em;">
+                            <li>Modern dark theme tasarım</li>
+                            <li>"Dijital Kimliğini Tek Linkle Yönet" sloganı</li>
+                            <li>Hemen Başla CTA butonu</li>
+                            <li>Sosyal medya platformları gösterimi</li>
+                            <li>Animasyonlu arka plan efektleri</li>
+                            <li>Responsive ve mobil uyumlu</li>
+                            <li>Giriş Yap ve Kayıt Ol seçenekleri</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 12: Dashboard Görünümü -->
+        <div class="slide">
+            <div class="content">
+                <h2>💻 Dashboard - Link Yönetimi</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div style="background: #1a1a1a; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: white;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3 style="color: white; margin: 0;">Hoş geldin, eray!</h3>
+                            <div style="background: #667eea; padding: 8px 20px; border-radius: 8px; font-size: 0.9em;">+ Link Ekle</div>
+                        </div>
+                        <div style="background: #2a2a2a; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                            <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Profil URL'in:</div>
+                            <div style="background: #1a1a1a; padding: 10px; border-radius: 5px; font-family: monospace;">linkhub.com/eray</div>
+                        </div>
+                        <div style="font-weight: bold; margin: 20px 0 10px 0;">Linklerim (8)</div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="background: #2a2a2a; padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 10px;">
+                                <div style="color: #999;">≡</div>
+                                <div style="background: #E1306C; width: 30px; height: 30px; border-radius: 5px;"></div>
+                                <div style="flex: 1; font-size: 0.9em;">Instagram</div>
+                                <div style="font-size: 0.8em; color: #999;">0 tıklama</div>
+                            </div>
+                            <div style="background: #2a2a2a; padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 10px;">
+                                <div style="color: #999;">≡</div>
+                                <div style="background: #1DA1F2; width: 30px; height: 30px; border-radius: 5px;"></div>
+                                <div style="flex: 1; font-size: 0.9em;">Twitter</div>
+                                <div style="font-size: 0.8em; color: #999;">0 tıklama</div>
+                            </div>
+                            <div style="background: #2a2a2a; padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 10px;">
+                                <div style="color: #999;">≡</div>
+                                <div style="background: #333; width: 30px; height: 30px; border-radius: 5px;"></div>
+                                <div style="flex: 1; font-size: 0.9em;">GitHub</div>
+                                <div style="font-size: 0.8em; color: #999;">0 tıklama</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <h3>Dashboard Özellikleri:</h3>
+                        <ul style="font-size: 1em;">
+                            <li>8 farklı platform linki yönetimi</li>
+                            <li>Drag & Drop ile sıralama (≡ ikonu)</li>
+                            <li>Her link için:
+                                <ul style="margin-left: 20px; font-size: 0.95em;">
+                                    <li>Platform ikonu ve rengi</li>
+                                    <li>Düzenleme butonu</li>
+                                    <li>Silme butonu</li>
+                                    <li>Tıklama sayısı</li>
+                                </ul>
+                            </li>
+                            <li>Link Ekle butonu</li>
+                            <li>Profil URL gösterimi ve kopyalama</li>
+                            <li>Profil görüntüleme linki</li>
+                            <li>Dark theme arayüz</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 13: Profil Sayfası -->
+        <div class="slide">
+            <div class="content">
+                <h2>💻 Profil Sayfası - Kullanıcı Görünümü</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div style="background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23222%22 width=%22100%22 height=%22100%22/></svg>'); background-size: cover; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center; color: white;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; background: #333; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5em;">
+                            🌍
+                        </div>
+                        <h3 style="color: white; margin: 10px 0;">@eray</h3>
+                        <p style="color: #ccc; font-size: 0.9em; margin: 10px 0 30px 0;">Merhaba ben eray!</p>
+                        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto;">
+                            <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 15px; border-radius: 10px; display: flex; align-items: center; gap: 12px;">
+                                <div style="background: #E1306C; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">📷</div>
+                                <div style="flex: 1; text-align: left; font-weight: 600;">Instagram</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 15px; border-radius: 10px; display: flex; align-items: center; gap: 12px;">
+                                <div style="background: #1DA1F2; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">🐦</div>
+                                <div style="flex: 1; text-align: left; font-weight: 600;">Twitter</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 15px; border-radius: 10px; display: flex; align-items: center; gap: 12px;">
+                                <div style="background: #333; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">💻</div>
+                                <div style="flex: 1; text-align: left; font-weight: 600;">GitHub</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 15px; border-radius: 10px; display: flex; align-items: center; gap: 12px;">
+                                <div style="background: #FF0000; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">▶️</div>
+                                <div style="flex: 1; text-align: left; font-weight: 600;">YouTube</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <h3>Profil Sayfası Özellikleri:</h3>
+                        <ul style="font-size: 1em;">
+                            <li>Özel arka plan görseli (özelleştirilebilir)</li>
+                            <li>Kullanıcı avatar'ı ve kullanıcı adı (@eray)</li>
+                            <li>Bio metni gösterimi</li>
+                            <li>Platform butonları:
+                                <ul style="margin-left: 20px; font-size: 0.95em;">
+                                    <li>Renkli platform ikonları</li>
+                                    <li>Glassmorphism efekti</li>
+                                    <li>Hover animasyonları</li>
+                                </ul>
+                            </li>
+                            <li>Temiz ve minimal tasarım</li>
+                            <li>Mobil uyumlu responsive görünüm</li>
+                            <li>Animasyonlu arka plan efektleri</li>
+                            <li>Dark theme desteği</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 14: Profil Düzenleme -->
+        <div class="slide">
+            <div class="content">
+                <h2>⚙️ Profil Düzenleme - Kapsamlı Özelleştirme</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div style="background: #1a1a1a; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: white; max-height: 500px; overflow-y: auto;">
+                        <h3 style="color: white; margin-top: 0;">Profil Önizleme</h3>
+                        <div style="background: #2a2a2a; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: #333; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 2em;">🌍</div>
+                            <div style="font-weight: bold;">@eray</div>
+                            <div style="font-size: 0.9em; color: #999; margin-top: 5px;">Merhaba ben eray!</div>
+                        </div>
+                        <div style="margin: 20px 0;">
+                            <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Tema</div>
+                            <div style="display: flex; gap: 10px;">
+                                <div style="background: #fff; width: 60px; height: 40px; border-radius: 8px; border: 2px solid #667eea;"></div>
+                                <div style="background: #1a1a1a; width: 60px; height: 40px; border-radius: 8px; border: 2px solid #333;"></div>
+                                <div style="background: linear-gradient(135deg, #667eea, #764ba2); width: 60px; height: 40px; border-radius: 8px;"></div>
+                            </div>
+                        </div>
+                        <div style="margin: 20px 0;">
+                            <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Düzen</div>
+                            <div style="display: flex; gap: 10px;">
+                                <div style="background: #2a2a2a; padding: 10px; border-radius: 8px; flex: 1; text-align: center; font-size: 0.8em;">Klasik</div>
+                                <div style="background: #2a2a2a; padding: 10px; border-radius: 8px; flex: 1; text-align: center; font-size: 0.8em;">Minimal</div>
+                                <div style="background: #667eea; padding: 10px; border-radius: 8px; flex: 1; text-align: center; font-size: 0.8em;">Kart</div>
+                            </div>
+                        </div>
+                        <div style="margin: 20px 0;">
+                            <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Arka Plan</div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                <div style="background: #2a2a2a; padding: 15px; border-radius: 8px; text-align: center; font-size: 0.8em;">Düz Renk</div>
+                                <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 15px; border-radius: 8px; text-align: center; font-size: 0.8em;">Gradyan</div>
+                                <div style="background: #2a2a2a; padding: 15px; border-radius: 8px; text-align: center; font-size: 0.8em;">Görsel</div>
+                                <div style="background: #2a2a2a; padding: 15px; border-radius: 8px; text-align: center; font-size: 0.8em;">Animasyonlu</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <h3>Özelleştirme Seçenekleri:</h3>
+                        <ul style="font-size: 0.95em;">
+                            <li><strong>Profil Bilgileri:</strong>
+                                <ul style="margin-left: 20px; font-size: 0.95em;">
+                                    <li>Bio düzenleme (200 karakter)</li>
+                                    <li>Avatar yükleme (2MB limit)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Tema Seçimi:</strong>
+                                <ul style="margin-left: 20px; font-size: 0.95em;">
+                                    <li>Light (Açık)</li>
+                                    <li>Dark (Koyu)</li>
+                                    <li>Purple (Mor)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Düzen Seçimi:</strong>
+                                <ul style="margin-left: 20px; font-size: 0.95em;">
+                                    <li>Klasik</li>
+                                    <li>Minimal</li>
+                                    <li>Kart</li>
+                                </ul>
+                            </li>
+                            <li><strong>Arka Plan:</strong>
+                                <ul style="margin-left: 20px; font-size: 0.95em;">
+                                    <li>Düz renk (renk seçici)</li>
+                                    <li>Gradyan efekti</li>
+                                    <li>Görsel yükleme (8MB)</li>
+                                    <li>Animasyonlu shader</li>
+                                </ul>
+                            </li>
+                            <li><strong>Buton Özelleştirme:</strong>
+                                <ul style="margin-left: 20px; font-size: 0.95em;">
+                                    <li>Stil (Fill/Outline/Shadow)</li>
+                                    <li>Renk seçici</li>
+                                    <li>Köşe yuvarlaklığı (4 seviye)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Yazı Tipi:</strong> Sans/Serif/Mono</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 15: Beklenen Sonuçlar -->
+        <div class="slide">
+            <div class="content">
+                <h2>📊 Beklenen Sonuçlar</h2>
+                <div class="grid">
+                    <div class="box">
+                        <h3>Teknik Başarılar</h3>
+                        <ul style="font-size: 1em;">
+                            <li>Çalışan MVP ürün</li>
+                            <li>Responsive arayüz</li>
+                            <li>10 platform desteği</li>
+                            <li>localStorage veri yönetimi</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Öğrenme Çıktıları</h3>
+                        <ul style="font-size: 1em;">
+                            <li>AI ile ürün geliştirme</li>
+                            <li>Modern web teknolojileri</li>
+                            <li>UI/UX prensipleri</li>
+                            <li>Proje dokümantasyonu</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box" style="margin-top: 20px;">
+                    <h3>Kullanıcı Değeri</h3>
+                    <ul style="font-size: 1em;">
+                        <li>Tek URL ile tüm linklere erişim</li>
+                        <li>Kolay link yönetimi</li>
+                        <li>Profesyonel görünüm</li>
+                        <li>Ücretsiz ve hızlı çözüm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 16: Kapanış -->
+        <div class="slide">
+            <div class="content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h1 style="font-size: 4em; margin-bottom: 30px;">🔗 LinkHub</h1>
+                <p class="subtitle" style="font-size: 2em; margin-bottom: 60px;">"Bir link, sınırsız bağlantı"</p>
+                <h2 style="border: none; font-size: 2.5em; margin-bottom: 40px;">Teşekkürler! 🙏</h2>
+                <p style="font-size: 1.5em; color: #666;">Sorularınız için hazırım</p>
+            </div>
+            <div class="footer">
+                <p style="font-size: 1.1em;">Plato Meslek Yüksekokulu</p>
+                <p style="font-size: 1.1em;">2026 Bahar Dönemi</p>
+                <p style="font-size: 1.1em;">PP214 / BTE208 - AI-Driven Product Design & Development</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateControls();
+        }
+
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function updateControls() {
+            // Kontrol butonlarını güncelle
+            const slideNumbers = document.querySelectorAll('.slide-number');
+            slideNumbers.forEach(num => {
+                num.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            });
+        }
+
+        // Klavye kontrolleri
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Her slayta kontrol butonları ekle
+        slides.forEach((slide, index) => {
+            const controls = document.createElement('div');
+            controls.className = 'controls';
+            controls.innerHTML = `
+                <button onclick="prevSlide()" ${index === 0 ? 'disabled' : ''}>← Önceki</button>
+                <span class="slide-number">${index + 1} / ${totalSlides}</span>
+                <button onclick="nextSlide()" ${index === totalSlides - 1 ? 'disabled' : ''}>Sonraki →</button>
+            `;
+            slide.appendChild(controls);
+        });
+
+        // İlk yükleme
+        updateControls();
+    </script>
+</body>
+</html>

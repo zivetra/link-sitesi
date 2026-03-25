@@ -2,11 +2,13 @@ import { useState, useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { FaLink, FaExternalLinkAlt, FaVolumeUp, FaVolumeMute } from 'react-icons/fa'
+import { FaLink, FaExternalLinkAlt, FaVolumeUp, FaVolumeMute, FaQrcode, FaShare, FaTimes } from 'react-icons/fa'
 import { getAllUsers, getUserLinks, getProfile } from '@/utils/storage'
+import { incrementLinkClicks } from '@/utils/jsonStorage'
 import { getPlatformIcon } from '@/utils/platforms'
 import type { User, Profile as ProfileType, Link as LinkType } from '@/types'
 import AnimatedShaderBackground from '@/components/ui/animated-shader-background'
+import { QRCodeSVG } from 'qrcode.react'
 
 export default function Profile() {
   const { username } = useParams<{ username: string }>()
@@ -15,6 +17,7 @@ export default function Profile() {
   const [links, setLinks] = useState<LinkType[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false)
+  const [showQRCode, setShowQRCode] = useState<boolean>(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
 
@@ -101,6 +104,68 @@ export default function Profile() {
     setLinks(userLinks)
 
     setLoading(false)
+  }
+
+  const handleLinkClick = async (linkId: string) => {
+    // Tıklama sayısını artır
+    await incrementLinkClicks(linkId)
+  }
+
+  const handleShare = async () => {
+    const profileUrl = `${window.location.origin}/${username}`
+    
+    // Web Share API destekleniyor mu kontrol et
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `@${username} - LinkHub`,
+          text: `${profile?.bio || `@${username}'in LinkHub profili`}`,
+          url: profileUrl
+        })
+      } catch (error) {
+        // Kullanıcı paylaşımı iptal etti veya hata oluştu
+        if ((error as Error).name !== 'AbortError') {
+          copyToClipboard(profileUrl)
+        }
+      }
+    } else {
+      // Web Share API desteklenmiyor, URL'yi kopyala
+      copyToClipboard(profileUrl)
+    }
+  }
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        alert('Profil linki kopyalandı!')
+      })
+      .catch(() => {
+        alert('Kopyalama başarısız oldu')
+      })
+  }
+
+  const downloadQRCode = () => {
+    const svg = document.getElementById('qr-code-svg')
+    if (!svg) return
+
+    const svgData = new XMLSerializer().serializeToString(svg)
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const img = new Image()
+
+    img.onload = () => {
+      canvas.width = img.width
+      canvas.height = img.height
+      ctx?.drawImage(img, 0, 0)
+      const pngFile = canvas.toDataURL('image/png')
+
+      const downloadLink = document.createElement('a')
+      downloadLink.download = `${username}-qrcode.png`
+      downloadLink.href = pngFile
+      downloadLink.click()
+    }
+
+    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)))
   }
 
   if (loading) {
@@ -443,6 +508,7 @@ export default function Profile() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block group"
+                  onClick={() => handleLinkClick(link.id)}
                 >
                   <div
                     className={`${getButtonClasses()} backdrop-blur-xl p-4 transition-all hover:scale-[1.02] ${layout === 'elite' ? 'relative overflow-hidden' : ''}`}
@@ -485,6 +551,68 @@ export default function Profile() {
             })
           )}
         </div>
+
+        {/* Share & QR Code Buttons */}
+        <div className="flex gap-3 mt-8 justify-center">
+          <Button
+            onClick={handleShare}
+            className={`${radiusClasses[cornerRadius]} gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white`}
+          >
+            <FaShare className="w-4 h-4" />
+            Profili Paylaş
+          </Button>
+          <Button
+            onClick={() => setShowQRCode(true)}
+            className={`${radiusClasses[cornerRadius]} gap-2 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white`}
+          >
+            <FaQrcode className="w-4 h-4" />
+            QR Kod
+          </Button>
+        </div>
+
+        {/* QR Code Modal */}
+        {showQRCode && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={() => setShowQRCode(false)}>
+            <div className="bg-white rounded-2xl p-8 max-w-sm w-full relative" onClick={(e) => e.stopPropagation()}>
+              <button
+                onClick={() => setShowQRCode(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <FaTimes className="w-6 h-6" />
+              </button>
+              
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  QR Kod
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  @{username}
+                </p>
+                
+                <div className="bg-white p-6 rounded-xl inline-block mb-6">
+                  <QRCodeSVG
+                    id="qr-code-svg"
+                    value={`${window.location.origin}/${username}`}
+                    size={200}
+                    level="H"
+                    includeMargin={true}
+                  />
+                </div>
+                
+                <p className="text-sm text-gray-500 mb-4">
+                  Bu QR kodu tarayarak profiline ulaşabilirler
+                </p>
+                
+                <Button
+                  onClick={downloadQRCode}
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                >
+                  QR Kodu İndir
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
         <div className={`text-center mt-12 pt-8 ${theme === 'light' ? 'border-t border-gray-200' : 'border-t border-white/10'}`}>

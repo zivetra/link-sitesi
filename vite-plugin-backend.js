@@ -83,13 +83,13 @@ export default function backendPlugin() {
             await fs.access(fullPath);
             await fs.unlink(fullPath);
             console.log(`✅ Silindi: ${filePath}`);
-          } catch (error) {
+          } catch (_err) {
             console.log(`⚠️ Dosya bulunamadı: ${filePath}`);
           }
           
           res.json({ success: true });
-        } catch (error) {
-          console.error('Silme hatası:', error);
+        } catch (_err) {
+          console.error('Silme hatası:', _err);
           res.status(500).json({ error: 'Silme başarısız' });
         }
       });
