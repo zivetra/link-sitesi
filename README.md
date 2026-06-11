@@ -1,295 +1,342 @@
-# LinkHub - Sosyal Medya Link Toplama Platformu
+# 🔗 LinkHub — Sosyal Medya Link Toplama Platformu
 
-Tüm sosyal medya linklerinizi tek bir minimal sayfada toplayın.
+> Tüm sosyal medya hesaplarınızı, web sitelerinizi ve önemli linklerinizi **tek bir özelleştirilebilir sayfada** toplayın.
 
-## 🎯 Proje Özeti
+LinkHub, "link-in-bio" konseptini temel alan, tamamen **AI destekli ürün tasarımı ve geliştirme** süreciyle üretilmiş bir web uygulamasıdır.
 
-LinkHub, kullanıcıların sosyal medya hesaplarını, web sitelerini ve önemli linklerini tek bir özelleştirilebilir sayfada toplamasını sağlayan minimal ve kullanıcı dostu bir platformdur.
+<p align="left">
+  <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white">
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white">
+  <img alt="Tailwind" src="https://img.shields.io/badge/TailwindCSS-3.4-06B6D4?logo=tailwindcss&logoColor=white">
+</p>
 
-### Problem
-- Instagram bio'sunda sadece 1 link paylaşabilme
-- Farklı platformlarda dağınık linkler
-- Link güncelleme zorluğu
-- Profesyonel görünüm eksikliği
-
-### Çözüm
-- ✅ Sınırsız link ekleme
-- ✅ Tek bir URL ile tüm linklere erişim
-- ✅ Kolay güncelleme ve yönetim
-- ✅ Minimal ve profesyonel tasarım
+---
 
 ## 🎓 Proje Bilgileri
 
-**Ders:** PP214 - Programlamada Yeni Eğilimler & BTE208 - Bilgisayar Teknolojilerinde Güncel Trendler  
-**Kurum:** Plato Meslek Yüksekokulu  
-**Dönem:** 2026 Bahar  
-**Konu:** AI-Driven Product Design & Development
+| Alan | Bilgi |
+| --- | --- |
+| **Ders** | PP214 - Programlamada Yeni Eğilimler & BTE208 - Bilgisayar Teknolojilerinde Güncel Trendler |
+| **Kurum** | Plato Meslek Yüksekokulu |
+| **Dönem** | 2026 Bahar |
+| **Konu** | AI-Driven Product Design & Development |
 
-## 🚀 Özellikler
+---
 
-### Kullanıcı Yönetimi
+## 📚 İçindekiler
+
+1. [Proje Özeti](#1-proje-özeti)
+2. [Kullanılan AI Araçları](#2-kullanılan-ai-araçları)
+3. [Prompt Kütüphanesi](#3-prompt-kütüphanesi)
+4. [Kurulum ve Çalıştırma](#4-kurulum-ve-çalıştırma)
+5. [Kullanım Kılavuzu](#5-kullanım-kılavuzu)
+6. [Gelecek Vizyonu](#6-gelecek-vizyonu)
+7. [Ek Bilgiler](#7-ek-bilgiler)
+
+---
+
+## 1. Proje Özeti
+
+### 🎯 Uygulamanın Amacı
+LinkHub'ın amacı, kullanıcıların dağınık olan tüm dijital varlıklarını (sosyal medya, web sitesi, portföy, müzik, iletişim) **tek bir minimal ve profesyonel sayfada** toplamasını sağlamaktır. Kullanıcı `linkhub.com/kullaniciadi` formatında kendine özel bir URL alır ve bu tek linki her yerde paylaşabilir.
+
+### 👥 Hedef Kullanıcı Kitlesi
+- **İçerik üreticileri & influencer'lar** — Instagram/TikTok bio'sundaki tek link sınırından kurtulmak isteyenler
+- **Sanatçılar, müzisyenler ve tasarımcılar** — Tüm platformlarını tek yerde sergilemek isteyenler
+- **Freelancer'lar & profesyoneller** — Portföy, iletişim ve sosyal hesaplarını derli toplu paylaşmak isteyenler
+- **Küçük işletmeler** — Menü, rezervasyon, harita ve sosyal medya linklerini tek noktada toplamak isteyenler
+
+### ❓ Çözülmek İstenen Problem
+| Problem | LinkHub Çözümü |
+| --- | --- |
+| Instagram/TikTok bio'sunda yalnızca **1 link** paylaşılabilmesi | ✅ Sınırsız link ekleme |
+| Linklerin farklı platformlara **dağılması** | ✅ Tek URL ile hepsine erişim |
+| Linkleri **güncellemenin** zorluğu | ✅ Anında düzenleme & sürükle-bırak sıralama |
+| **Profesyonel görünüm** eksikliği | ✅ Tema, arka plan, buton ve font özelleştirme |
+
+### ✨ Öne Çıkan Özellikler
+
+#### 🔐 Kullanıcı Yönetimi
 - ✅ Kullanıcı kaydı ve girişi
-- ✅ Oturum yönetimi (localStorage)
-- ✅ Güvenli şifre saklama
+- ✅ Oturum yönetimi
 - ✅ Form validasyonu
+- ✅ Özel kullanıcı URL'i (`linkhub.com/kullaniciadi`)
 
-### Link Yönetimi
+#### 🔗 Link Yönetimi
 - ✅ Sınırsız link ekleme
-- ✅ 13 farklı platform desteği (Instagram, Twitter, GitHub, vb.)
-- ✅ Platform seçimi (görsel butonlar)
+- ✅ **13 farklı platform desteği** (Instagram, Twitter, GitHub, LinkedIn, YouTube, TikTok, Facebook, Twitch, Discord, Spotify, Website, Email, Özel Link)
+- ✅ Platform seçimi (renkli görsel butonlar)
 - ✅ Link düzenleme ve silme
 - ✅ **Drag & Drop ile sıralama**
 - ✅ Link aktif/pasif yapma
-- ✅ Renkli platform ikonları
+- ✅ Link tıklama sayacı altyapısı
 
-### Profil Özellikleri
-- ✅ Özel kullanıcı URL'i (linkhub.com/username)
-- ✅ Profil görüntüleme sayfası
+#### 🎨 Profil Özelleştirme
 - ✅ **Profil düzenleme sayfası**
-- ✅ **Bio ekleme/güncelleme (200 karakter)**
-- ✅ **Avatar yükleme (2MB limit, JPG/PNG/GIF)**
-- ✅ **Tema seçimi (Light/Dark/Purple)**
-- ✅ **Düzen seçimi (Klasik/Minimal/Kart)**
+- ✅ **Bio ekleme/güncelleme** (200 karakter limit)
+- ✅ **Avatar yükleme** (max 2MB, JPG/PNG/GIF)
+- ✅ **Tema seçimi** (Light / Dark)
+- ✅ **Düzen seçimi** (Classic / Minimal / Card / Elite)
 - ✅ **Arka plan özelleştirme:**
-  - Düz renk
+  - Düz renk (renk seçici)
   - Gradyan
-  - Görsel yükleme (8MB limit)
-  - Animasyonlu shader
-- ✅ **Buton stilleri (Fill/Outline/Shadow)**
-- ✅ **Buton renk seçici**
-- ✅ **Köşe yuvarlaklığı (Yok/Küçük/Orta/Tam)**
-- ✅ **Yazı tipi seçimi (Sans/Serif/Mono)**
-- ✅ Minimal ve temiz tasarım
-- ✅ Responsive tasarım
+  - Görsel yükleme (max 8MB)
+  - GIF arka plan
+  - **Three.js animasyonlu shader**
+- ✅ **Buton stilleri** (Fill / Outline / Shadow / Gradient / Glass / Neon)
+- ✅ **Buton & metin renk seçici**
+- ✅ **Köşe yuvarlaklığı** (Yok / Küçük / Orta / Tam)
+- ✅ **Yazı tipi seçimi** (Sans / Serif / Mono)
+- ✅ **QR kod** ile profil paylaşımı
+- ✅ Responsive (mobil + masaüstü) tasarım
 
-## 🛠️ Kullanılan Teknolojiler
+---
 
-### Frontend
-- **React 19.2.4** - UI framework
-- **Vite 8.0.0** - Build tool
-- **React Router DOM** - Routing
-- **Tailwind CSS 3.4.17** - Styling
-- **shadcn/ui** - UI components
-- **Lucide React** - Icons
+## 2. Kullanılan AI Araçları
 
-### Veri Depolama
-- **localStorage** - Tarayıcı yerel depolama
+Bu proje uçtan uca AI araçlarıyla; konsept, tasarım, kod ve içerik aşamalarında yapay zekâ kullanılarak geliştirilmiştir.
 
-### Geliştirme Araçları
-- **ESLint** - Code linting
-- **PostCSS** - CSS processing
+| Aşama | Kullanılan AI Araçları | Kullanım Amacı |
+| --- | --- | --- |
+| **Konsept & Planlama** | ChatGPT (GPT-4), Claude | Problem tanımı, hedef kitle analizi, user journey ve özellik listesi çıkarımı |
+| **UI / Görsel Tasarım** | shadcn/ui + Tailwind (AI üretimli), Claude (UI kodu) | Minimal arayüz, component üretimi, renk & tipografi kararları |
+| **Kod Üretimi** | Claude, Cursor, GitHub Copilot, ChatGPT | TypeScript/React bileşenleri, storage katmanı, CRUD fonksiyonları, debugging |
+| **Prototipleme** | Vite + React (AI destekli iskelet), Cursor | Hızlı sayfa iskeletleri ve route yapısı |
+| **İçerik & Dokümantasyon** | ChatGPT, Claude | README, prompt kütüphanesi ve teknik dokümantasyon üretimi |
 
-## 📦 Kurulum
+> **Not:** Ödev şablonundaki örnek araçlara karşılık gelecek şekilde — *UI tasarımı:* Tailwind/shadcn + Claude, *Kod üretimi:* GPT / Claude / Cursor / Copilot, *Prototipleme:* Vite + Cursor kullanılmıştır.
+
+---
+
+## 3. Prompt Kütüphanesi
+
+Proje sürecinde kullanılan en başarılı prompt örnekleri aşağıda kategorilere ayrılmıştır.
+
+### 🧠 Konsept Üretim Promptları
+```text
+"Sosyal medya kullanıcılarının tüm linklerini tek bir yerde toplama ihtiyacını
+analiz et. Hedef kitle kim olabilir, hangi problemleri yaşıyorlar ve bir
+'link-in-bio' uygulaması bu problemleri nasıl çözer? Madde madde açıkla."
+```
+```text
+"Bir influencer'ın LinkHub'ı keşfetmesinden kayıt olup linklerini eklemesine
+ve özel URL'ini paylaşmasına kadar olan kullanıcı yolculuğunu (user journey)
+adım adım yaz. Her adımda kullanıcının duygusunu ve eylemini belirt."
+```
+
+### 🎨 UI Üretim Promptları
+```text
+"React + Tailwind + shadcn/ui kullanarak minimal ve modern bir 'link-in-bio'
+landing page tasarla. Sade tipografi, bol beyaz alan, net bir hero başlığı ve
+'Ücretsiz Başla' CTA butonu olsun. Mobil uyumlu olmalı."
+```
+```text
+"Kullanıcının profilini özelleştirebileceği bir EditProfile sayfası tasarla:
+tema seçimi, arka plan tipi (renk/gradyan/görsel/animasyon), buton stili ve
+font seçimi için görsel seçici kartlar içersin. shadcn Card ve Button kullan."
+```
+
+### 💻 Kod Üretim Promptları
+```text
+"TypeScript ile JSON dosya tabanlı bir storage katmanı yaz. Kullanıcı kaydı,
+girişi, oturum kontrolü ve çıkış fonksiyonları olsun. Veriler localStorage
+yerine /api üzerinden public/data/*.json dosyalarına kaydedilsin."
+```
+```text
+"React için link CRUD fonksiyonları üret. Her link şu alanlara sahip olsun:
+id, userId, platformName, url, icon, order, isActive, createdAt, clicks.
+Linkleri sürükle-bırak ile yeniden sıralayıp order alanını güncelle."
+```
+
+### 🗃️ Veri Üretim Promptları
+```text
+"13 popüler sosyal medya platformu için bir Platform[] dizisi oluştur. Her
+platform için name, icon (react-icons anahtarı), marka rengi (hex) ve örnek
+URL placeholder'ı bulunsun. Instagram, Twitter, GitHub, LinkedIn, YouTube,
+TikTok, Facebook, Twitch, Discord, Spotify ve Website dahil olsun."
+```
+
+### 📝 İçerik Üretim Promptları
+```text
+"LinkHub projesi için ödev rubriğine (Proje Özeti, AI Araçları, Prompt
+Kütüphanesi, Kurulum, Gelecek Vizyonu) uygun, profesyonel ve düzenli bir
+README.md hazırla. Türkçe yaz, tablolar ve emoji başlıklar kullan."
+```
+
+---
+
+## 4. Kurulum ve Çalıştırma
 
 ### Gereksinimler
-- Node.js 18+ 
-- npm veya yarn
+- **Node.js 18+**
+- **npm** (veya yarn / pnpm)
 
 ### Adımlar
 
-1. Projeyi klonlayın:
 ```bash
+# 1. Projeyi klonlayın
 git clone https://github.com/KULLANICI_ADIN/linkhub.git
 cd linkhub
-```
 
-2. Bağımlılıkları yükleyin:
-```bash
+# 2. Bağımlılıkları yükleyin
 npm install
-```
 
-3. Geliştirme sunucusunu başlatın:
-```bash
+# 3. Geliştirme sunucusunu başlatın
 npm run dev
 ```
 
-4. Tarayıcıda açın:
+Ardından tarayıcıdan açın:
+
 ```
-http://localhost:5001
+http://localhost:5000
 ```
 
-## 📱 Kullanım Kılavuzu
+> **Not:** `npm run dev` hem frontend'i (Vite) hem de JSON tabanlı backend API'yi (`vite-plugin-backend.js`) tek komutta başlatır. Ayrı bir sunucu çalıştırmaya gerek yoktur.
+
+### Kullanılabilir Komutlar
+| Komut | Açıklama |
+| --- | --- |
+| `npm run dev` | Geliştirme sunucusu + backend API |
+| `npm run build` | Production derlemesi (`dist/`) |
+| `npm run preview` | Production derlemesini önizleme |
+| `npm run lint` | ESLint ile kod denetimi |
+
+### 🧪 Demo Hesap
+| Alan | Değer |
+| --- | --- |
+| Kullanıcı adı | `demo` |
+| Şifre | `demo123` |
+
+---
+
+## 5. Kullanım Kılavuzu
 
 ### Yeni Hesap Oluşturma
-1. http://localhost:5001/register adresine gidin
-2. Kullanıcı adı, email ve şifre girin
-3. "Hesap Oluştur" butonuna tıklayın
-4. Otomatik olarak dashboard'a yönlendirileceksiniz
+1. `http://localhost:5000/register` adresine gidin
+2. Kullanıcı adı, e-posta ve şifre girin
+3. **"Hesap Oluştur"** butonuna tıklayın
+4. Otomatik olarak dashboard'a yönlendirilirsiniz
 
 ### Link Ekleme
-1. Dashboard'da "Link Ekle" butonuna tıklayın
+1. Dashboard'da **"Link Ekle"** butonuna tıklayın
 2. Platform seçin (Instagram, Twitter, GitHub, vb.)
 3. URL'nizi girin
-4. "Ekle" butonuna tıklayın
+4. **"Ekle"** butonuna tıklayın
 
 ### Link Sıralama
-- Linkleri sürükle-bırak ile yeniden sıralayın
+- Linkleri **sürükle-bırak** ile yeniden sıralayın
 - Değişiklikler otomatik kaydedilir
 
 ### Profil Düzenleme
-1. Dashboard'da "Profil Düzenle" butonuna tıklayın
-2. **Avatar yükleyin** (isteğe bağlı, max 2MB)
+1. Dashboard'da **"Profil Düzenle"** butonuna tıklayın
+2. **Avatar yükleyin** (isteğe bağlı, max 2MB — JPG/PNG/GIF)
 3. **Bio ekleyin/güncelleyin** (200 karakter)
-4. **Tema seçin** (Light/Dark/Purple)
-5. **Düzen seçin** (Klasik/Minimal/Kart)
+4. **Tema seçin** (Light / Dark)
+5. **Düzen seçin** (Classic / Minimal / Card / Elite)
 6. **Arka plan özelleştirin:**
    - Düz renk: Renk seçici ile özel renk
    - Gradyan: Hazır gradyan efekti
    - Görsel: Kendi görselinizi yükleyin (max 8MB)
-   - Animasyonlu: Shader animasyonu
-7. **Buton stilini seçin** (Fill/Outline/Shadow)
-8. **Buton rengini özelleştirin** (Renk seçici)
-9. **Köşe yuvarlaklığını ayarlayın** (Yok/Küçük/Orta/Tam)
-10. **Yazı tipini seçin** (Sans Serif/Serif/Mono)
-11. "Değişiklikleri Kaydet" butonuna tıklayın
+   - GIF: Hareketli arka plan
+   - Animasyonlu: Three.js shader animasyonu
+7. **Buton stilini seçin** (Fill / Outline / Shadow / Gradient / Glass / Neon)
+8. **Buton & metin rengini özelleştirin** (renk seçici)
+9. **Köşe yuvarlaklığını ayarlayın** (Yok / Küçük / Orta / Tam)
+10. **Yazı tipini seçin** (Sans / Serif / Mono)
+11. **"Değişiklikleri Kaydet"** butonuna tıklayın
 
-### Profil Görüntüleme
-- Dashboard'da "Görüntüle" butonuna tıklayın
-- Veya direkt: http://localhost:5001/kullaniciadi
+### Profil Görüntüleme & Paylaşma
+- Dashboard'da **"Görüntüle"** butonuna tıklayın
+- Veya doğrudan: `http://localhost:5000/kullaniciadi`
+- Profilinizi **QR kod** ile de paylaşabilirsiniz
 
-## 🎨 Kullanılan AI Araçları
+---
 
-### Konsept Geliştirme
-- **ChatGPT/Claude** - Problem tanımı, kullanıcı profili, user journey
-- **AI ile dokümantasyon** - AŞAMA_2_KONSEPT.md
+## 6. Gelecek Vizyonu
 
-### Tasarım
-- **shadcn/ui** - Minimal UI component'leri
-- **Tailwind CSS** - Utility-first CSS framework
+### 🤖 Geliştirilebilecek AI Özellikleri
+- **AI bio yazarı** — Kullanıcının mesleğine ve tarzına göre otomatik biyografi önerisi
+- **AI tema asistanı** — "Minimal ve mor tonlu bir tema yap" gibi komutla otomatik renk/arka plan üretimi
+- **Akıllı link önerisi** — Eklenen URL'den platformu, başlığı ve ikonu otomatik tanıma
+- **AI içerik analizi** — Hangi linklerin daha çok tıklandığını analiz edip sıralama önerme
 
-### Kod Geliştirme
-- **Cursor / GitHub Copilot** - Kod yazımı ve tamamlama
-- **ChatGPT** - Kod açıklamaları ve debugging
+### 🧩 Çözülebilecek Kullanıcı Problemleri
+- Tasarımdan anlamayan kullanıcıların **tek tıkla profesyonel görünüm** elde etmesi
+- Çok dilli kitleye hitap edenler için **otomatik çeviri** desteği
+- İşletmeler için **rezervasyon / ürün vitrin** blokları
 
-## 📝 Prompt Kütüphanesi
+### 📈 Ürünün Ölçeklenmesi
+- **Gerçek backend & veritabanı** — Node.js + Express + PostgreSQL/MongoDB'ye geçiş
+- **Güvenlik** — Şifre hashleme (bcrypt), JWT tabanlı oturum, e-posta doğrulama, şifre sıfırlama
+- **Analitik panel** — Tıklama, ziyaretçi ve coğrafi dağılım istatistikleri
+- **Özel domain & ekip hesapları** — Markalar için `marka.com` bağlama ve çoklu yönetici
+- **Tema pazarı** — Kullanıcıların hazır temaları paylaşıp indirebileceği bir ekosistem
 
-### Konsept Geliştirme Promptları
+---
 
-**Problem Tanımı:**
-```
-Sosyal medya kullanıcılarının linklerini tek bir yerde toplama ihtiyacını 
-analiz et ve bir çözüm öner. Hedef kitle, problemler ve çözümler neler olabilir?
-```
+## 7. Ek Bilgiler
 
-**Kullanıcı Yolculuğu:**
-```
-Bir influencer'ın LinkHub'ı keşfetmesinden, kayıt olup linklerini eklemesine 
-kadar olan süreci adım adım yaz. Her adımda kullanıcının düşünceleri ve 
-eylemleri neler olabilir?
-```
+### 🛠️ Kullanılan Teknolojiler
+| Katman | Teknoloji |
+| --- | --- |
+| **Frontend** | React 19, TypeScript 5.9, Vite 8 |
+| **Routing** | React Router DOM 7 |
+| **Stil** | Tailwind CSS 3.4, shadcn/ui, Radix UI |
+| **İkonlar** | Lucide React, React Icons |
+| **3D / Animasyon** | Three.js (animasyonlu shader arka plan) |
+| **QR Kod** | qrcode.react |
+| **Backend (geliştirme)** | Express + Vite plugin (`vite-plugin-backend.js`) |
+| **Veri Depolama** | JSON dosya tabanlı (`public/data/*.json`) + fiziksel medya (`public/media/`) |
+| **Geliştirme Araçları** | ESLint, PostCSS, Autoprefixer |
 
-### UI Tasarım Promptları
-
-**Ana Sayfa:**
-```
-Minimal ve modern bir link-in-bio landing page tasarımı. 
-Beyaz arka plan, sade tipografi, shadcn/ui component'leri kullan.
-```
-
-**Dashboard:**
-```
-Link yönetim paneli tasarımı. Kullanıcı linklerini ekleyebilmeli, 
-düzenleyebilmeli ve sıralayabilmeli. Minimal ve kullanıcı dostu.
-```
-
-### Kod Üretim Promptları
-
-**localStorage Yönetimi:**
-```
-React için localStorage tabanlı kullanıcı yönetim sistemi. 
-Kayıt, giriş, çıkış ve oturum kontrolü fonksiyonları.
-```
-
-**Link CRUD İşlemleri:**
-```
-localStorage kullanarak link ekleme, güncelleme, silme ve 
-listeleme fonksiyonları. Her link için id, userId, platformName, 
-url, order ve isActive alanları olmalı.
-```
-
-## 🗂️ Proje Yapısı
-
+### 🗂️ Proje Yapısı
 ```
 linkhub/
+├── public/
+│   ├── data/                 # JSON "veritabanı" dosyaları
+│   │   ├── users.json        # Kullanıcı bilgileri
+│   │   ├── current_user.json # Aktif oturum
+│   │   ├── profiles.json     # Profil ayarları
+│   │   └── links.json        # Kullanıcı linkleri
+│   └── media/                # Yüklenen medya dosyaları
+│       ├── avatars/          # Profil resimleri
+│       └── backgrounds/      # Arka plan görselleri & GIF'ler
 ├── src/
 │   ├── components/
-│   │   └── ui/              # shadcn/ui components
+│   │   ├── ui/               # shadcn/ui bileşenleri
+│   │   ├── Navbar.tsx
+│   │   └── ...
 │   ├── pages/
-│   │   ├── Landing.jsx      # Ana sayfa
-│   │   ├── Register.jsx     # Kayıt sayfası
-│   │   ├── Login.jsx        # Giriş sayfası
-│   │   ├── Dashboard.jsx    # Link yönetimi
-│   │   ├── EditProfile.jsx  # Profil düzenleme
-│   │   ├── Profile.jsx      # Profil görüntüleme
-│   │   └── Test.jsx         # Test sayfası
+│   │   ├── Landing.tsx       # Ana sayfa
+│   │   ├── Register.tsx      # Kayıt
+│   │   ├── Login.tsx         # Giriş
+│   │   ├── Dashboard.tsx     # Link yönetimi
+│   │   ├── EditProfile.tsx   # Profil düzenleme
+│   │   └── Profile.tsx       # Genel profil görüntüleme (/:username)
 │   ├── utils/
-│   │   ├── storage.js       # localStorage yönetimi
-│   │   └── platforms.js     # Platform bilgileri
-│   ├── App.jsx              # Ana uygulama
-│   ├── main.jsx             # Entry point
-│   └── index.css            # Global styles
-├── public/
-├── ÖZELLIKLER.md                      # Detaylı özellik listesi
-├── PROJE_YOL_HARITASI.txt             # Proje yol haritası
-├── TAMAMLANDI.md                      # Tamamlanan özellikler
-├── PROJE_SURECI_VE_PROMPT_GECMISI.md  # Prompt geçmişi ve süreç
-├── package.json
-├── vite.config.js
+│   │   ├── jsonStorage.ts    # JSON dosya yönetimi
+│   │   ├── storage.ts        # Ana storage API
+│   │   └── platforms.ts      # Platform bilgileri (13 platform)
+│   ├── types/index.ts        # TypeScript tipleri
+│   ├── App.tsx               # Route tanımları
+│   └── main.tsx              # Giriş noktası
+├── vite-plugin-backend.js    # Geliştirme backend API'si
+├── vite.config.ts
 ├── tailwind.config.js
-└── README.md
+└── package.json
 ```
 
-## 🧪 Demo Hesap
+> **Veri Depolama Notu:** Bu proje tarayıcının localStorage'ı yerine **JSON dosya tabanlı** bir depolama kullanır. Tüm metin verileri `public/data/*.json` dosyalarında, yüklenen medya dosyaları ise `public/media/` klasöründe fiziksel olarak saklanır. Detaylar için [`STORAGE_SYSTEM.md`](STORAGE_SYSTEM.md) dosyasına bakın.
 
-Projeyi test etmek için demo hesap kullanabilirsiniz:
+### 📄 Lisans
+Bu proje **eğitim amaçlı** geliştirilmiştir.
 
-- **Kullanıcı adı:** demo
-- **Şifre:** demo123
-
-## 🔮 Gelecek Vizyonu
-
-### Tamamlanan Özellikler ✅
-- ✅ Drag & drop ile link sıralama
-- ✅ Sosyal medya platform ikonları (13 platform)
-- ✅ Gelişmiş tema sistemi (Light/Dark/Purple)
-- ✅ Kapsamlı profil düzenleme
-- ✅ Bio ekleme (200 karakter limit)
-- ✅ Avatar yükleme (2MB limit)
-- ✅ Arka plan özelleştirme (4 farklı tip)
-- ✅ Buton stil özelleştirme (3 farklı stil)
-- ✅ Renk seçici (buton ve arka plan)
-- ✅ Köşe yuvarlaklığı ayarı (4 seviye)
-- ✅ Yazı tipi seçimi (3 farklı font)
-- ✅ Düzen seçimi (3 farklı layout)
-- ✅ Görsel yükleme (avatar ve arka plan)
-- ✅ Animasyonlu shader arka plan
-
-### Planlanan Özellikler (Opsiyonel)
-- Link tıklama istatistikleri
-- QR kod oluşturma
-- Profil paylaşma butonu
-- Link önizleme
-- Daha fazla animasyon efekti
-- Özel CSS ekleme
-
-### Potansiyel Geliştirmeler
-- Backend entegrasyonu (Node.js + MongoDB)
-- Gerçek veritabanı
-- Email doğrulama
-- Şifre sıfırlama
-- Özel domain desteği
-- Analytics dashboard
-
-## 📄 Lisans
-
-Bu proje eğitim amaçlı geliştirilmiştir.
-
-## 👨‍💻 Geliştirici
-
-**Plato Meslek Yüksekokulu**  
-AI-Driven Product Design & Development  
+### 👨‍💻 Geliştirici
+**Eray Çelik**
+Plato Meslek Yüksekokulu — AI-Driven Product Design & Development
 2026 Bahar Dönemi
 
 ---
 
-**Not:** Bu proje localhost üzerinde çalışmak üzere tasarlanmıştır. Tüm veriler tarayıcının localStorage'ında saklanır.
+<p align="center"><i>Tüm linkleriniz, tek bir yerde. 🔗</i></p>

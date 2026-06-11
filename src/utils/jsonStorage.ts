@@ -36,7 +36,8 @@ const MEDIA_DIRS = {
 // JSON dosyasından veri oku
 const readJSON = async <T>(filePath: string): Promise<T | null> => {
   try {
-    const response = await fetch(filePath);
+    // cache: 'no-store' -> kaydedilen değişiklikler anında okunur (tarayıcı önbelleğini atla)
+    const response = await fetch(filePath, { cache: 'no-store' });
     if (!response.ok) {
       console.log(`Dosya bulunamadı: ${filePath}`);
       return null;

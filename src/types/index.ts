@@ -33,7 +33,7 @@ export interface Profile {
   userId: string;
   bio: string;
   avatar: string;
-  theme: 'light' | 'dark' | 'purple';
+  theme: 'light' | 'dark';
   customUrl: string;
   layout?: 'classic' | 'minimal' | 'card' | 'elite';
   backgroundType?: 'solid' | 'gradient' | 'image' | 'animated' | 'gif';

@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { FaLink, FaExternalLinkAlt, FaVolumeUp, FaVolumeMute, FaQrcode, FaShare, FaTimes } from 'react-icons/fa'
-import { getAllUsers, getUserLinks, getProfile } from '@/utils/storage'
+import { getAllUsers, getUserLinks, getProfile, getCurrentUser } from '@/utils/storage'
 import { incrementLinkClicks } from '@/utils/jsonStorage'
 import { getPlatformIcon } from '@/utils/platforms'
 import type { User, Profile as ProfileType, Link as LinkType } from '@/types'
@@ -18,6 +18,7 @@ export default function Profile() {
   const [loading, setLoading] = useState<boolean>(true)
   const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false)
   const [showQRCode, setShowQRCode] = useState<boolean>(false)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
 
@@ -25,6 +26,11 @@ export default function Profile() {
   useEffect(() => {
     loadProfile()
   }, [username])
+
+  useEffect(() => {
+    // Giriş yapmış kullanıcı var mı kontrol et (CTA butonunu yönlendirmek için)
+    getCurrentUser().then(user => setIsLoggedIn(user !== null))
+  }, [])
 
   useEffect(() => {
     // Müzik varsa otomatik çal
@@ -98,10 +104,9 @@ export default function Profile() {
     const userProfile = await getProfile(foundUser.id)
     setProfile(userProfile)
 
-    // Aktif linkleri al
+    // Sadece aktif (gizlenmemiş) linkleri göster
     const userLinks = await getUserLinks(foundUser.id)
     setLinks(userLinks.filter(link => link.isActive))
-    setLinks(userLinks)
 
     setLoading(false)
   }
@@ -210,7 +215,9 @@ export default function Profile() {
   const buttonTextColor = profile?.buttonTextColor || 'auto'
   const cornerRadius = profile?.cornerRadius || 'medium'
   const fontStyle = profile?.fontStyle || 'sans'
-  const theme = profile?.theme || 'dark'
+  // Eski/geçersiz tema değerlerini (ör. "purple") güvenli şekilde dark'a düşür.
+  // Aksi halde themeColors[theme] undefined olur ve sayfa boş kalır.
+  const theme: 'light' | 'dark' = profile?.theme === 'light' ? 'light' : 'dark'
 
   // Renk parlaklığını hesapla
   const getColorBrightness = (hexColor: string): number => {
@@ -275,17 +282,19 @@ export default function Profile() {
       textMuted: 'text-white/70',
       card: 'bg-white/5 border-white/10',
       cardHover: 'hover:bg-white/10'
-    },
-    purple: {
-      bg: 'bg-gradient-to-br from-purple-900 to-indigo-900',
-      text: 'text-white',
-      textMuted: 'text-purple-200',
-      card: 'bg-white/10 border-purple-500/20',
-      cardHover: 'hover:bg-white/15'
     }
   }
 
   const currentTheme = themeColors[theme]
+
+  // İçerik metni doğrudan arka planın üzerinde durur; rengi temaya değil
+  // arka plan yüzeyinin parlaklığına göre seçiyoruz ki her zaman okunabilir olsun.
+  // (görsel/gif/animasyon arka planlarında koyu overlay var → açık metin)
+  const isLightContentSurface =
+    (backgroundType === 'solid' && getColorBrightness(backgroundColor) > 150) ||
+    (backgroundType === 'gradient' && theme === 'light')
+  const contentText = isLightContentSurface ? 'text-gray-900' : 'text-white'
+  const contentTextMuted = isLightContentSurface ? 'text-gray-700' : 'text-white/70'
 
   // Button style classes
   const getButtonClasses = () => {
@@ -367,9 +376,7 @@ export default function Profile() {
         console.log('Gradient arka plan, tema:', theme)
         // Tema bazlı gradyan
         if (theme === 'light') {
-          return <div className="fixed inset-0 bg-gradient-to-br from-gray-100 via-blue-50 to-purple-50" />
-        } else if (theme === 'purple') {
-          return <div className="fixed inset-0 bg-gradient-to-br from-purple-900 via-indigo-900 to-violet-900" />
+          return <div className="fixed inset-0 bg-gradient-to-br from-indigo-200 via-purple-200 to-rose-200" />
         } else {
           return <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900" />
         }
@@ -477,13 +484,13 @@ export default function Profile() {
           </div>
 
           {/* Username */}
-          <h1 className={`text-2xl font-bold mb-2 ${currentTheme.text}`}>
+          <h1 className={`text-2xl font-bold mb-2 ${contentText}`}>
             @{user.username}
           </h1>
 
           {/* Bio */}
           {profile?.bio && (
-            <p className={`max-w-md mx-auto ${currentTheme.textMuted}`}>
+            <p className={`max-w-md mx-auto ${contentTextMuted}`}>
               {profile.bio}
             </p>
           )}
@@ -616,12 +623,12 @@ export default function Profile() {
 
         {/* Footer */}
         <div className={`text-center mt-12 pt-8 ${theme === 'light' ? 'border-t border-gray-200' : 'border-t border-white/10'}`}>
-          <p className={`text-sm mb-2 ${currentTheme.textMuted}`}>
-            Kendi link sayfanı oluştur
+          <p className={`text-sm mb-2 ${contentTextMuted}`}>
+            {isLoggedIn ? 'Kendi profilini yönet' : 'Kendi link sayfanı oluştur'}
           </p>
-          <Link to="/register">
+          <Link to={isLoggedIn ? '/dashboard' : '/register'}>
             <Button className={`${radiusClasses[cornerRadius]} bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white`}>
-              Ücretsiz Başla
+              {isLoggedIn ? "Dashboard'a Git" : 'Ücretsiz Başla'}
             </Button>
           </Link>
         </div>

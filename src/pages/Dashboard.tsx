@@ -1,4 +1,4 @@
-import { useState, useEffect, DragEvent, useRef } from 'react'
+import { useState, useEffect, DragEvent } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -6,9 +6,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { getCurrentUser, logoutUser, getUserLinks, addLink, deleteLink, toggleLinkStatus, reorderLinks, getProfile } from '@/utils/storage'
 import { PLATFORMS, getPlatformInfo, getPlatformIcon } from '@/utils/platforms'
-import { exportData, importData, exportUserMedia } from '@/utils/exportImport'
 import type { UserWithoutPassword, Link as LinkType, Platform, Profile } from '@/types'
-import { FaLink, FaPlus, FaTrash, FaGripVertical, FaEye, FaSignOutAlt, FaExternalLinkAlt, FaCog, FaUser, FaDownload, FaUpload, FaFileDownload, FaQrcode, FaShare, FaTimes } from 'react-icons/fa'
+import { FaLink, FaPlus, FaTrash, FaGripVertical, FaEye, FaSignOutAlt, FaExternalLinkAlt, FaCog, FaUser, FaQrcode, FaShare, FaTimes } from 'react-icons/fa'
 import AnimatedShaderBackground from '@/components/ui/animated-shader-background'
 import { QRCodeSVG } from 'qrcode.react'
 
@@ -27,7 +26,6 @@ export default function Dashboard() {
   const [newLink, setNewLink] = useState<NewLink>({ platformName: '', url: '', icon: '' })
   const [draggedItem, setDraggedItem] = useState<LinkType | null>(null)
   const [showQRCode, setShowQRCode] = useState<boolean>(false)
-  const importFileRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     const loadData = async () => {
@@ -117,41 +115,6 @@ export default function Dashboard() {
   const handleLogout = async () => {
     await logoutUser()
     navigate('/')
-  }
-
-  const handleExportData = () => {
-    try {
-      exportData()
-      alert('Verileriniz başarıyla indirildi!')
-    } catch (error) {
-      alert('Export hatası: ' + error)
-    }
-  }
-
-  const handleImportData = () => {
-    importFileRef.current?.click()
-  }
-
-  const handleFileImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    try {
-      await importData(file)
-      alert('Verileriniz başarıyla yüklendi! Sayfa yenileniyor...')
-      window.location.reload()
-    } catch (error) {
-      alert('Import hatası: ' + error)
-    }
-  }
-
-  const handleExportMedia = () => {
-    if (!user) return
-    try {
-      exportUserMedia(user.id)
-    } catch (error) {
-      alert('Medya export hatası: ' + error)
-    }
   }
 
   const handleShare = async () => {
@@ -314,54 +277,6 @@ export default function Dashboard() {
                 QR Kod
               </Button>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Data Management */}
-        <Card className="mb-6 bg-white/5 border-white/10">
-          <CardHeader>
-            <CardTitle className="text-white">Veri Yönetimi</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleExportData}
-                className="gap-2 border-white/20 text-white hover:bg-white/10"
-              >
-                <FaDownload className="w-4 h-4" />
-                Verileri İndir (JSON)
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleImportData}
-                className="gap-2 border-white/20 text-white hover:bg-white/10"
-              >
-                <FaUpload className="w-4 h-4" />
-                Verileri Yükle
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleExportMedia}
-                className="gap-2 border-white/20 text-white hover:bg-white/10"
-              >
-                <FaFileDownload className="w-4 h-4" />
-                Medyaları İndir
-              </Button>
-            </div>
-            <p className="text-xs text-white/50 mt-3">
-              Verilerinizi JSON dosyası olarak yedekleyin veya medya dosyalarınızı (avatar, arka plan, müzik) indirin.
-            </p>
-            <input
-              ref={importFileRef}
-              type="file"
-              accept=".json"
-              onChange={handleFileImport}
-              className="hidden"
-            />
           </CardContent>
         </Card>
 

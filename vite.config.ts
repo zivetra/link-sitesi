@@ -12,6 +12,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5000,
+    port: Number(process.env.PORT) || 5000,
+    // SPA için tüm route'ları index.html'e yönlendir
+    historyApiFallback: true,
   },
 })

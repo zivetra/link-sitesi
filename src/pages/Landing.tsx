@@ -1,10 +1,22 @@
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { FaStar, FaBolt, FaLink, FaShieldAlt, FaArrowRight, FaCheck, FaInstagram, FaTwitter, FaGithub, FaLinkedin, FaYoutube, FaTiktok, FaSpotify, FaTwitch } from 'react-icons/fa'
+import { getCurrentUser } from '@/utils/storage'
 import AnimatedShaderBackground from '@/components/ui/animated-shader-background'
 import Navbar from '@/components/Navbar'
 
 export default function Landing() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+
+  useEffect(() => {
+    // Giriş yapmış kullanıcıyı kontrol et; varsa CTA'ları dashboard'a yönlendir
+    getCurrentUser().then(user => setIsLoggedIn(user !== null))
+  }, [])
+
+  // Giriş yapılmışsa "başla" butonları dashboard'a, değilse kayıt sayfasına gitsin
+  const ctaTarget = isLoggedIn ? '/dashboard' : '/register'
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <AnimatedShaderBackground />
@@ -38,12 +50,12 @@ export default function Landing() {
 
             {/* CTA Button */}
             <div className="flex flex-col items-center justify-center gap-6 pt-6">
-              <Link to="/register" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
+              <Link to={ctaTarget} className="w-full sm:w-auto">
+                <Button
+                  size="lg"
                   className="w-full sm:w-auto bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white font-bold px-12 py-8 text-xl shadow-2xl shadow-purple-500/40 hover:shadow-purple-500/60 transition-all duration-300 group rounded-2xl"
                 >
-                  Hemen Başla
+                  {isLoggedIn ? 'Dashboard\'a Git' : 'Hemen Başla'}
                   <FaArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                 </Button>
               </Link>
@@ -184,12 +196,12 @@ export default function Landing() {
                 <p className="text-2xl text-white/60 mb-12 max-w-3xl mx-auto leading-relaxed">
                   Ücretsiz hesap oluştur ve tüm linklerini tek bir yerde topla. Profesyonel görünüm için hazır.
                 </p>
-                <Link to="/register">
-                  <Button 
-                    size="lg" 
+                <Link to={ctaTarget}>
+                  <Button
+                    size="lg"
                     className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white font-bold px-14 py-9 text-xl shadow-2xl shadow-purple-500/50 hover:shadow-purple-500/70 transition-all duration-300 group rounded-2xl"
                   >
-                    Ücretsiz Hesap Oluştur
+                    {isLoggedIn ? 'Dashboard\'a Git' : 'Ücretsiz Hesap Oluştur'}
                     <FaArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                 </Link>
