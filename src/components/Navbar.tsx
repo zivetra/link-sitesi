@@ -2,13 +2,25 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { FaLink, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { getCurrentUser, logoutUser } from '@/utils/storage'
+import { useState, useEffect } from 'react'
 
 export default function Navbar() {
   const navigate = useNavigate()
-  const currentUser = getCurrentUser()
+  const [currentUser, setCurrentUser] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
 
-  const handleLogout = () => {
-    logoutUser()
+  useEffect(() => {
+    const loadUser = async () => {
+      const user = await getCurrentUser()
+      setCurrentUser(user)
+      setLoading(false)
+    }
+    loadUser()
+  }, [])
+
+  const handleLogout = async () => {
+    await logoutUser()
+    setCurrentUser(null)
     navigate('/')
   }
 
@@ -27,7 +39,10 @@ export default function Navbar() {
         </Link>
         
         <nav className="flex items-center gap-4">
-          {currentUser ? (
+          {loading ? (
+            // Yükleniyor
+            <div className="w-32 h-9 bg-white/10 rounded-md animate-pulse" />
+          ) : currentUser ? (
             // Giriş yapmış kullanıcı için
             <>
               <Link to="/dashboard">

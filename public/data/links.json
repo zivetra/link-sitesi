@@ -19,7 +19,7 @@
     "order": 1,
     "isActive": true,
     "createdAt": "2026-03-25T12:09:21.941Z",
-    "clicks": 0
+    "clicks": 1
   },
   {
     "id": "link_1774440569378_pde3bjvzg",
@@ -27,7 +27,7 @@
     "platformName": "Twitter",
     "url": "https://x.com/?logout=1774440566608",
     "icon": "twitter",
-    "order": 2,
+    "order": 3,
     "isActive": true,
     "createdAt": "2026-03-25T12:09:29.378Z",
     "clicks": 0
@@ -38,7 +38,7 @@
     "platformName": "GitHub",
     "url": "https://github.com/zivetra",
     "icon": "github",
-    "order": 3,
+    "order": 2,
     "isActive": true,
     "createdAt": "2026-03-25T12:09:39.333Z",
     "clicks": 0
@@ -74,7 +74,7 @@
     "order": 6,
     "isActive": true,
     "createdAt": "2026-03-25T12:10:12.191Z",
-    "clicks": 0
+    "clicks": 1
   },
   {
     "id": "link_1774440622248_zumupylc6",
@@ -96,6 +96,6 @@
     "order": 8,
     "isActive": true,
     "createdAt": "2026-03-25T12:10:34.560Z",
-    "clicks": 0
+    "clicks": 2
   }
 ]
